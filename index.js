@@ -5,6 +5,8 @@ import {Provider} from 'react-redux';
 import Desktop from './components/Desktop';
 import fenestra from './reducers';
 
+import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.css';
 import './styles/app.css';
 
 class Fenestra extends React.Component {

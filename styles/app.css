@@ -159,7 +159,7 @@
 
 .fenestra-desktop-icon {
   width: 150px;
-  height: 80px;
+  min-height: 80px;
   margin: 5px;
   overflow: hidden;
   display: block
