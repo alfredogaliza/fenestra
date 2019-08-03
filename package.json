@@ -1,6 +1,6 @@
 {
   "name": "fenestra",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Uma API de janelas baseada em react/redux",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "react-redux": "^7.1.0",
     "redux": "^4.0.4"
   },
-  "peerDependencies": {    
+  "peerDependencies": {
     "bootstrap": "^4",
     "fontawesome": "^5"
   }
