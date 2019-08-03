@@ -1,0 +1,175 @@
+
+.fenestra-select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.fenestra-desktop {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 50px;
+  background-color: lightgray;
+}
+
+.fenestra-window {
+  background-color: white;
+  display: flex;
+  align-items: flex-start;
+  align-content: stretch;
+  flex-direction: column;
+}
+
+.fenestra-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; 
+
+  position: absolute;
+  z-index: 1000;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  text-align: center;  
+  z-index: 100000;
+  font-size: 60pt;
+}
+
+.fenestra-window-title {
+  cursor: default;
+  width: 100%;
+  padding: 5px !important;
+  font-weight: bold;
+  color: white;
+
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+
+  display: flex;
+  align-items: center;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.fenestra-window-title-active {
+  background-color: #202020;
+}
+
+.fenestra-window-title-inactive {
+  background-color: #808080;
+}
+
+.fenestra-window-title-buttons {
+  margin-left: auto;
+}
+
+.fenestra-window-body {
+  width: 100%;
+  padding: 15px;
+  position: relative;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-content: stretch;
+  align-self: stretch;
+
+  border: solid #C0C0C0 1px;
+}
+
+.fenestra-window-footer {
+  width: 100%;
+  height: 24px;
+  margin-top: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: center; 
+  background-color: #F0F0F0;
+  border: solid #C0C0C0 1px;  
+}
+
+.fenestra-window-resize {
+  cursor: nwse-resize;
+  color: gray !important;
+  margin-left: auto;
+  margin-right: 2px;
+  align-self: flex-end;
+  padding: 0 !important;
+  text-decoration: none;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.fenestra-desktop-background {
+  position: absolute;
+  opacity: .2;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: -1;
+  width: 100%;
+}
+
+.fenestra-taskbar {
+  height: 50px;
+  width: 100%;
+  padding: 0px;
+}
+
+.fenestra-taskbar-buttons {
+  overflow-y: auto;
+  height: 40px;
+  margin: 0px;
+}
+
+.fenestra-taskbar-button {
+  height: 100%;
+  margin: 0px 3px;
+  max-width: 200px;
+  overflow: hidden;
+  white-space: nowrap
+}
+
+.fenestra-desktop-icons {
+  display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+  align-content: flex-start;
+  height: 100%;
+  margin: 5px;
+}
+
+.fenestra-desktop-icon {
+  width: 150px;
+  min-height: 80px;
+  margin: 5px;
+  overflow: hidden;
+  display: block
+}
+
+.fenestra-datatable-header {
+  cursor: default;
+}
+
+.fenestra-datatable-actions {
+  width: 1%;
+  text-align: center;
+}
