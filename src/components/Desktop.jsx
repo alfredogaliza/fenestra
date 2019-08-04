@@ -6,8 +6,6 @@ import { boundDesktopActions } from '../actions';
 import Taskbar from "./Taskbar";
 import Icon from './Icon';
 
-import background from '../images/background.jpg';
-
 class Desktop extends React.Component {
 
     constructor(props) {
@@ -39,7 +37,7 @@ class Desktop extends React.Component {
                 onMouseMove={({ pageX, pageY }) => this.props.move(pageX, pageY)}
                 onMouseUp={() => this.props.endMove()}
                 onMouseLeave={() => this.props.endMove()}>
-                <img src={this.props.background || background} alt="Desktop Background" className="fenestra-desktop-background" />
+                <img src={this.props.background || null} alt="Desktop Background" className="fenestra-desktop-background" />
                 <div className="fenestra-desktop-icons">
                     {icons}
                 </div>

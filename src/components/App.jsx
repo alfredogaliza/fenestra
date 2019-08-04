@@ -6,6 +6,7 @@ import fenestra from '../reducers';
 import Desktop from './Desktop';
 
 import '../styles/app.css';
+import background from '../images/background.png';
 
 class App extends React.Component {
 
@@ -22,7 +23,7 @@ class App extends React.Component {
     render() {
         return (
             <Provider store={this.store}>
-                <Desktop background={this.props.background} data={this.props.data}/>
+                <Desktop background={this.props.background || background} data={this.props.data}/>
             </Provider>
         );
     }
