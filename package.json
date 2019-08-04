@@ -1,8 +1,8 @@
 {
   "name": "fenestra",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Uma API de janelas baseada em react/redux",
-  "main": "build/js/main.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --watch",
@@ -16,7 +16,9 @@
     "windows",
     "api",
     "react",
-    "redux"
+    "redux",
+    "bootstrap",
+    "font-awesome"
   ],
   "author": "Luiz Alfredo Galiza",
   "license": "ISC",
@@ -24,14 +26,13 @@
     "url": "https://github.com/alfredogaliza/fenestra/issues"
   },
   "homepage": "https://github.com/alfredogaliza/fenestra#readme",
-  "dependencies": {
+  "dependencies": {},
+  "peerDependencies": {
+    "bootstrap": "^4",
+    "fontawesome": "^5",
     "react": "^16.8.6",
     "react-redux": "^7.1.0",
     "redux": "^4.0.4"
-  },
-  "peerDependencies": {
-    "bootstrap": "^4",
-    "fontawesome": "^5"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -40,6 +41,11 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.1.0",
+    "file-loader": "^4.1.0",
+    "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.10",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.4",
     "style-loader": "^0.23.1",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6"

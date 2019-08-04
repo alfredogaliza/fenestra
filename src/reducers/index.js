@@ -161,10 +161,10 @@ const reducer = (state = initialState, action) => {
 
             break;
 
-        case actionType.SET_STATE:
+        case actionType.SET_DATA:
             var winKey = 0;
-            const icons = (action.state.icons || []);
-            const windows = (action.state.windows || []).map(window => {
+            const icons = (action.data.icons || []);
+            const windows = (action.data.windows || []).map(window => {
                 return newWindow(winKey++, window.props, window.template, window.templateProps);
             });
 

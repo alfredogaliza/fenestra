@@ -1,17 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { boundDesktopActions } from '../actions';
 
 import Taskbar from "./Taskbar";
 import Icon from './Icon';
 
-import '../styles/app.css';
+import background from '../images/background.jpg';
 
 class Desktop extends React.Component {
 
     constructor(props) {
         super(props);
-        this.store = this.props.store ? this.props.store : createStore(combineReducers({ fenestra }));
+        this.props.setData(this.props.data);
     }
 
     render() {
@@ -34,19 +35,17 @@ class Desktop extends React.Component {
         });
 
         return (
-            <Provider store={this.store}>
-                <div className="fenestra-desktop"
-                    onMouseMove={({ pageX, pageY }) => this.props.move(pageX, pageY)}
-                    onMouseUp={() => this.props.endMove()}
-                    onMouseLeave={() => this.props.endMove()}>
-                    <img src={this.props.background} alt="Desktop Background" className="fenestra-desktop-background" />
-                    <div className="fenestra-desktop-icons">
-                        {icons}
-                    </div>
-                    {windows}
-                    <Taskbar minimize={(key, minimize) => this.props.minimize(key, minimize)} />
+            <div className="fenestra-desktop"
+                onMouseMove={({ pageX, pageY }) => this.props.move(pageX, pageY)}
+                onMouseUp={() => this.props.endMove()}
+                onMouseLeave={() => this.props.endMove()}>
+                <img src={this.props.background || background} alt="Desktop Background" className="fenestra-desktop-background" />
+                <div className="fenestra-desktop-icons">
+                    {icons}
                 </div>
-            </Provider>
+                {windows}
+                <Taskbar minimize={(key, minimize) => this.props.minimize(key, minimize)} />
+            </div>
         );
     }
 }

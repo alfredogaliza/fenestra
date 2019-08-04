@@ -15,7 +15,7 @@ class Taskbar extends React.Component {
     }
 
     minimizeAll = () => {
-        this.props.forEeach(window => {
+        this.props.windows.forEach(window => {
             this.props.minimize(window.key);
         });            
     }
@@ -36,7 +36,7 @@ class Taskbar extends React.Component {
                     {buttons}
                 </div>
                 <div className="ml-auto">
-                    <button type="button" className="btn btn-outline-secondary" onClick={this.props.minimizeAll}>
+                    <button type="button" className="btn btn-outline-secondary" onClick={() => this.minimizeAll()}>
                         <i className="fa fa-desktop"></i>
                     </button>
                 </div>

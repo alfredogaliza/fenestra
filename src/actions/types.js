@@ -10,5 +10,5 @@ export const WINDOW_TRANSFORM       = "WINDOW_TRANSFORM";
 export const WINDOW_END_TRANSFORM   = "WINDOW_END_TRANSFORM";
 export const WINDOW_MINIMIZE_ALL    = "WINDOW_MINIMIZE_ALL";
 export const SET_LOADING            = "SET_LOADING";
-export const SET_STATE              = "START_SESSION";
+export const SET_DATA               = "SET_DATA";
 export const SET_FOOTER             = "SET_FOOTER";

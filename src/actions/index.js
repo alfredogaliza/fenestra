@@ -94,9 +94,9 @@ export const setLoading = (key, isLoading) => ({
     key, isLoading
 });
 
-export const setState = state => ({
-    type: actionType.SET_STATE,
-    state
+export const setData = (data = {icons: [], windows: []}) => ({
+    type: actionType.SET_DATA,
+    data
 });
 
 export const setFooter = (key, footer) => ({
@@ -117,7 +117,7 @@ export const boundDesktopActions = dispatch => ({
     close: (key) => dispatch(close(key)),
     setLoading: (key, isLoading = true) => dispatch(setLoading(key, isLoading)),
     setFooter: (key, footer = "") => dispatch(setFooter(key, footer)),
-    setState: state => dispatch(setState(state)),
+    setData: data => dispatch(setData(data))
 });
 
 export const boundTaskbarActions = dispatch => ({
@@ -134,5 +134,5 @@ export const boundWindowActions = (key) => dispatch => ({
     close: () => dispatch(close(key)),
     setLoading: (isLoading = true) => dispatch(setLoading(key, isLoading)),
     setFooter: (footer = "") => dispatch(setFooter(key, footer)),
-    setState: state => dispatch(setState(state)),
+    setData: data => dispatch(setData(data))
 });
