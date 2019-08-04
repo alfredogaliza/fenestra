@@ -99,6 +99,29 @@ Os templates especificados na carga de dados receberão as seguintes propriedade
 *    setLoading(isLoading = true): Coloca um backdrop de carregamento da janela,
 *    setFooter(footer = ""): Altera a mensagem de rodapé da janela,
 *    setData({windows: [], icons: []}): Recarrega a sessão com novas janelas e ícones
-    
-      
-    
+
+# O que é um template fenestra?
+
+Template é apenas um componente React injetado em uma Janela. Formulários, páginas, listas, tabelas ou qualquer tipo de conteúdo renderizável pelo React pode ser injetado como Template. Após inserido na janela, o componente receberá as propriedades definidas em templateProps, além das ações definidas para controle da janela. Também são inseridos métodos para controle da sessão (open e setData).
+
+# Posso utilizar um template conectado ao redux?
+
+Boas notícias. Sim! Basta passar seus redutores ao Fenestra que ele se encarregará de criar a store:
+```
+...
+import myReducer1 from './reducers/reducer1';
+import myReducer2 from './reducers/reducer2';
+const reducers = [myReducer1, myReducer2];
+...
+ReactDOM.render(<Fenestra reducers={reducers} />, document.getElementByIdd('root'));
+```
+# Não gostei da cor de fundo do desktop, posso colocar minha própria imagem?
+Sim, apenas passe a propriedade background para o Fenestra:
+```
+import background from './images/background.png';
+ReactDOM.render(<Fenestra background={background} />, document.getElementByIdd('root'));
+```
+
+# Também não gostei da cor do tema, posso escrever meu próprio css?
+Sim, as janelas são criadas com classes CSS específicas que vc pode sobrescrever com seu próprio arquivo. Dê uma olhada na folha de estilos do Fenestra:
+![app.css](https://github.com/alfredogaliza/fenestra/blob/master/src/styles/app.css)
