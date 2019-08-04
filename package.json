@@ -1,12 +1,13 @@
 {
   "name": "fenestra",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Uma API de janelas baseada em react/redux",
-  "main": "dist/js/main.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --watch",
-    "build": "webpack"
+    "build": "webpack",
+    "prepublishOnly": "babel ./src --out-dir ./dist -s inline"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "redux": "^4.0.4"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
