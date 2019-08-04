@@ -32,12 +32,17 @@ class Desktop extends React.Component {
             );
         });
 
+        const background = this.props.background?
+            <img src={this.props.background} alt="Desktop Background" className="fenestra-desktop-background" />
+            : null;
+
+
         return (
             <div className="fenestra-desktop"
                 onMouseMove={({ pageX, pageY }) => this.props.move(pageX, pageY)}
                 onMouseUp={() => this.props.endMove()}
                 onMouseLeave={() => this.props.endMove()}>
-                <img src={this.props.background || null} alt="Desktop Background" className="fenestra-desktop-background" />
+                {background}
                 <div className="fenestra-desktop-icons">
                     {icons}
                 </div>
