@@ -1,7 +1,7 @@
 
 # Fenestra
 
-Fenestra é uma biblioteca para implementação de um Desktop baseado em janelas. Construído sobre React/Redux, você poderá fornecer seus próprios redutores para integrar a Store do Desktop. A interface do usuário se baseia no Bootstrap 4 e nos ícones do Font Awesome 5.
+Fenestra é uma biblioteca para implementação de um Desktop baseado em janelas. Construído sobre React/Redux, você poderá fornecer seus próprios redutores para integrar a Store do Desktop. A interface do usuário se baseia no Bootstrap 4 e nos ícones do Font Awesome 4.7.
 
 ![Captura de tela de 2019-08-04 11-20-41](https://user-images.githubusercontent.com/6832383/62424798-46cc4b00-b6aa-11e9-934c-b99eb3c6e209.png)
 
@@ -92,15 +92,13 @@ Os templates especificados na carga de dados receberão as seguintes propriedade
 *    open(props, template, templateProps): Abre uma nova janela,
 *    activate(): Ativa a janela,
 *    minimize(min = true): Minimiza ou deminimiza a janela,
-*    maximize(max = true): Maximiza ou demaxmiza a janela,
-*    startMove(x, y): Inicia a movimentação da janela,
-*    startResize(x, y): Inicia o redimensionamento da janela,    
+*    maximize(max = true): Maximiza ou demaxmiza a janela,    
 *    close(): Fecha a janela,
 *    setLoading(isLoading = true): Coloca um backdrop de carregamento da janela,
 *    setFooter(footer = ""): Altera a mensagem de rodapé da janela,
 *    setData({windows: [], icons: []}): Recarrega a sessão com novas janelas e ícones
 
-# O que é um template fenestra?
+# O que é um template Fenestra?
 
 Template é apenas um componente React injetado em uma Janela. Formulários, páginas, listas, tabelas ou qualquer tipo de conteúdo renderizável pelo React pode ser injetado como Template. Após inserido na janela, o componente receberá as propriedades definidas em templateProps, além das ações definidas para controle da janela. Também são inseridos métodos para controle da sessão (open e setData).
 

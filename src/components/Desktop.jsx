@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { boundDesktopActions } from '../actions';
+import { boundDesktopActions, boundDesktopProps } from '../actions';
 
 import Taskbar from "./Taskbar";
 import Icon from './Icon';
@@ -32,7 +32,7 @@ class Desktop extends React.Component {
             );
         });
 
-        const background = this.props.background?
+        const background = this.props.background ?
             <img src={this.props.background} alt="Desktop Background" className="fenestra-desktop-background" />
             : null;
 
@@ -43,19 +43,17 @@ class Desktop extends React.Component {
                 onMouseUp={() => this.props.endMove()}
                 onMouseLeave={() => this.props.endMove()}>
                 {background}
+                <div className="fenestra-desktop-windows">
+                    <div className="fenestra-desktop-windows-holder" style={{ width: this.props.maxWidth, height: this.props.maxHeight }}></div>
+                    {windows}
+                </div>
                 <div className="fenestra-desktop-icons">
                     {icons}
                 </div>
-                {windows}
                 <Taskbar minimize={(key, minimize) => this.props.minimize(key, minimize)} />
-            </div>
+            </div >
         );
     }
 }
-const mapStateToProps = state => ({
-    icons: state.fenestra.icons,
-    windows: state.fenestra.windows,
-    isLoading: state.fenestra.isLoading
-});
 
-export default connect(mapStateToProps, boundDesktopActions)(Desktop);
+export default connect(boundDesktopProps, boundDesktopActions)(Desktop);

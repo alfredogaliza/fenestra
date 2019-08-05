@@ -51,28 +51,6 @@ class WindowTemplate extends React.Component {
 
     render() {
 
-        const style = {
-            position: this.props.maximized ? 'absolute' : 'absolute',
-            top: this.props.maximized ? 0 :
-                (this.props.moveable ?
-                    this.props.style.top :
-                    (global.window.innerHeight - 50 - this.props.style.height) / 2
-                ),
-            left: this.props.maximized ? 0 :
-                (this.props.moveable ?
-                    this.props.style.left :
-                    (global.window.innerWidth - this.props.style.width) / 2
-                ),
-            width: this.props.maximized ? undefined : this.props.style.width,
-            height: this.props.maximized ? undefined : this.props.style.height,
-            right: this.props.maximized ? 0 : undefined,
-            bottom: this.props.maximized ? 0 : undefined,
-            display: this.props.minimized ? 'none' : 'flex',
-            zIndex: this.props.style.zIndex,
-            border: this.props.maximized ? 'none' : undefined,
-            borderRadius: this.props.maximized ? 0 : undefined,
-        };
-
         const loading = this.props.isLoading ? (
             <div className="fenestra-loading">
                 <i className="fa fa-spinner fa-spin"></i>
@@ -80,8 +58,17 @@ class WindowTemplate extends React.Component {
         ) : null;
 
         return (
-            <div className="fenestra-window" style={style} onMouseDown={() => this.props.activate()}>
-                <div className={"fenestra-window-title fenestra-window-title-" + (this.props.active ? "active" : "inactive")} style={{ borderRadius: this.props.maximized ? 0 : undefined }} onDoubleClick={(e) => this.toggleMaximize(e)} onMouseDown={e => this.props.startMove(e.pageX, e.pageY)}>
+            <div
+                className={
+                    "fenestra-window " +
+                    (this.props.active ? "fenestra-window-active" : "") + " " +
+                    (this.props.maximized ? "fenestra-window-maximized" : "") + " " +
+                    (this.props.minimized ? "fenestra-window-minimized" : "")
+                }
+                style={!this.props.maximized? this.props.style : null}
+                onMouseDown={() => this.props.activate()}
+            >
+                <div className="fenestra-window-title" style={{ borderRadius: this.props.maximized ? 0 : undefined }} onDoubleClick={(e) => this.toggleMaximize(e)} onMouseDown={e => this.props.startMove(e.pageX, e.pageY)}>
 
                     <span>{this.props.title}</span>
 

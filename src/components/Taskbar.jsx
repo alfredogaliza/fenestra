@@ -10,36 +10,37 @@ import { boundTaskbarActions } from '../actions';
  */
 class Taskbar extends React.Component {
 
-    minimize(window) {
-        this.props.minimize(window.key, !window.props.minimized)
+    toggle(window) {
+        if (window.props.active) {
+            this.props.minimize(window.key);
+        } else {
+            this.props.minimize(window.key, false);
+            this.props.activate(window.key);
+        }
     }
 
     minimizeAll = () => {
         this.props.windows.forEach(window => {
             this.props.minimize(window.key);
-        });            
+        });
     }
 
     render() {
         const buttons = this.props.windows.map(window => {
             return (
-                <div className="nav-item" key={window.key} >
-                    <button className={"btn btn-outline-secondary fenestra-taskbar-button " + (window.props.active ? "active" : "")} onClick={() => this.minimize(window)}>
-                        {window.props.title}
-                    </button>
-                </div>
-            )
+                <button key={window.key} className={"fenestra-taskbar-button " + (window.props.active ? "fenestra-taskbar-button-active" : "")} onClick={() => this.toggle(window)}>
+                    {window.props.title}
+                </button>
+            );
         });
         return (
-            <nav className="navbar navbar-expand-sm navbar-dark bg-dark fixed-bottom fenestra-taskbar" >
-                <div className="navbar-nav d-flex flex-wrap fenestra-taskbar-buttons">
+            <nav className="fenestra-taskbar" >
+                <div className="fenestra-taskbar-buttons">
                     {buttons}
                 </div>
-                <div className="ml-auto">
-                    <button type="button" className="btn btn-outline-secondary" onClick={() => this.minimizeAll()}>
-                        <i className="fa fa-desktop"></i>
-                    </button>
-                </div>
+                <button type="button" className="fenestra-taskbar-button fenestra-taskbar-button-desktop" onClick={() => this.minimizeAll()}>
+                    <i className="fa fa-desktop"></i>
+                </button>
             </nav>
         );
     }

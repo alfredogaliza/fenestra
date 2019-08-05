@@ -1,21 +1,18 @@
 import * as actionType from './types';
 import EmptyTemplate from '../components/EmptyTemplate';
 
-export const DEFAULT_WIDTH = 600;
-export const DEFAULT_HEIGHT = 400;
+export const DEFAULT_WIDTH = 300;
+export const DEFAULT_HEIGHT = 200;
 
 export const TRANSFORM_MOVE = 1;
 export const TRANSFORM_RESIZE = 2;
 
 export const DEFAULT_PROPS = {
     style: {
-        zIndex: 2,
-        display: 'block',
-        position: 'relative',
+        top: 0,
+        left: 0,
         width: DEFAULT_WIDTH,
-        height: DEFAULT_HEIGHT,
-        top: global.window? (global.window.innerHeight - DEFAULT_HEIGHT - 50) / 2 : 0,
-        left: global.window? (global.window.innerHeight - DEFAULT_WIDTH) / 2 : 0,
+        height: DEFAULT_HEIGHT
     },
     active: true,
     maximized: false,
@@ -104,10 +101,18 @@ export const setFooter = (key, footer) => ({
     key, footer
 });
 
+export const boundDesktopProps = state => ({
+    icons: state.fenestra.icons,
+    windows: state.fenestra.windows,
+    maxWidth: Math.max(0, ...state.fenestra.windows.map(window => window.props.style.left + window.props.style.width)),
+    maxHeight: Math.max(0, ...state.fenestra.windows.map(window => window.props.style.top + window.props.style.height)),
+    isLoading: state.fenestra.isLoading
+});
+
 export const boundDesktopActions = dispatch => ({
     open: (props, template, templateProps) => dispatch(open(props, template, templateProps)),
     openIcon: ({ window: { props, template, templateProps } }) => dispatch(open(props, template, templateProps)),
-    activate: (key) => dispatch(activate(key)),
+    activate: (key, active = true) => dispatch(activate(key, active)),
     minimize: (key, min = true) => dispatch(minimize(key, min)),
     maximize: (key, max = true) => dispatch(maximize(key, max)),
     startMove: (key, x, y) => dispatch(startTransform(key, x, y, TRANSFORM_MOVE)),
@@ -121,18 +126,35 @@ export const boundDesktopActions = dispatch => ({
 });
 
 export const boundTaskbarActions = dispatch => ({
-    minimize: (key, min = true) => dispatch(minimize(key, min))
+    minimize: (key, min = true) => dispatch(minimize(key, min)),
+    activate: (key, active = true) => dispatch(activate(key, active))
+});
+
+export const boundTemplateProps = (key) => (state) => ({
+    fenestra: state.fenestra,
+    window: state.fenestra.windows.find(window => window.key === key)
+});
+
+export const boundTemplateActions = (key) => dispatch => ({
+    open:           (props, template, templateProps) => dispatch(open(props, template, templateProps)),
+    activate:       (active = true) => dispatch(activate(key, active)),
+    minimize:       (min = true) => dispatch(minimize(key, min)),
+    maximize:       (max = true) => dispatch(maximize(key, max)),
+    close:          () => dispatch(close(key)),
+    setLoading:     (isLoading = true) => dispatch(setLoading(key, isLoading)),
+    setFooter:      (footer = null) => dispatch(setFooter(key, footer)),
+    setData:        (data) => dispatch(setData(data))
 });
 
 export const boundWindowActions = (key) => dispatch => ({
-    open: (props, template, templateProps) => dispatch(open(props, template, templateProps)),
-    activate: () => dispatch(activate(key)),
-    minimize: (min = true) => dispatch(minimize(key, min)),
-    maximize: (max = true) => dispatch(maximize(key, max)),
-    startMove: (x, y) => dispatch(startTransform(key, x, y, TRANSFORM_MOVE)),
-    startResize: (x, y) => dispatch(startTransform(key, x, y, TRANSFORM_RESIZE)),    
-    close: () => dispatch(close(key)),
-    setLoading: (isLoading = true) => dispatch(setLoading(key, isLoading)),
-    setFooter: (footer = "") => dispatch(setFooter(key, footer)),
-    setData: data => dispatch(setData(data))
+    open:           (props, template, templateProps) => dispatch(open(props, template, templateProps)),
+    activate:       (active = true) => dispatch(activate(key, active)),
+    minimize:       (min = true) => dispatch(minimize(key, min)),
+    maximize:       (max = true) => dispatch(maximize(key, max)),
+    startMove:      (x, y) => dispatch(startTransform(key, x, y, TRANSFORM_MOVE)),
+    startResize:    (x, y) => dispatch(startTransform(key, x, y, TRANSFORM_RESIZE)),    
+    close:          () => dispatch(close(key)),
+    setLoading:     (isLoading = true) => dispatch(setLoading(key, isLoading)),
+    setFooter:      (footer = null) => dispatch(setFooter(key, footer)),
+    setData:        (data) => dispatch(setData(data))
 });

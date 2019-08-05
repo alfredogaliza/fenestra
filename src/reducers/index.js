@@ -1,9 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as actionType from '../actions/types';
+import * as types from '../actions/types';
 import WindowTemplate from '../components/WindowTemplate';
-import { boundWindowActions, TRANSFORM_MOVE, TRANSFORM_RESIZE, DEFAULT_PROPS } from '../actions';
+import {
+    TRANSFORM_MOVE,
+    TRANSFORM_RESIZE,
+    DEFAULT_PROPS,
+    boundTemplateProps,
+    DEFAULT_WIDTH,
+    DEFAULT_HEIGHT
+} from '../actions';
 
 const initialState = {
     winKey: 0,
@@ -22,7 +29,10 @@ const initialState = {
 
 function newWindow(key, props, template, templateProps) {
 
-    const Content = connect(undefined, boundWindowActions(key))(template);
+    const Template = connect(boundTemplateProps(key), boundTemplateActions(key))(template);
+
+    const top = (key % 10) * 50 + 10;
+    const left = (key % 10) * 50 + 10;
 
     return {
         key,
@@ -32,12 +42,11 @@ function newWindow(key, props, template, templateProps) {
             style: {
                 ...DEFAULT_PROPS.style,
                 ...props.style,
-                top: (key % 10) * 50 + 10,
-                left: (key % 10) * 50 + 10
+                top, left
             }
         },
         component: WindowTemplate(key),
-        content: React.createElement(Content, {...templateProps})
+        content: <Template {...templateProps} />
     };
 }
 
@@ -46,10 +55,10 @@ const reducer = (state = initialState, action) => {
     var newState = { ...state };
     var target = null;
 
-    if (action.type === actionType.WINDOW_TRANSFORM && state.transformKey === null) return state;
+    if (action.type === types.WINDOW_TRANSFORM && state.transformKey === null) return state;
 
     switch (action.type) {
-        case actionType.WINDOW_OPEN:
+        case types.WINDOW_OPEN:
 
             const key = newState.winKey++;
             const window = newWindow(key, action.props, action.template, action.templateProps);
@@ -64,11 +73,11 @@ const reducer = (state = initialState, action) => {
             });
 
             break;
-        case actionType.WINDOW_CLOSE:
+        case types.WINDOW_CLOSE:
             newState.windows = newState.windows.filter(window => window.key !== action.key);
             break;
 
-        case actionType.WINDOW_ACTIVATE:
+        case types.WINDOW_ACTIVATE:
             newState.windows = newState.windows.map(window => {
                 var props = { ...window.props, style: { ...window.props.style } };
                 props.active = (window.key === action.key);
@@ -77,16 +86,19 @@ const reducer = (state = initialState, action) => {
             });
             break;
 
-        case actionType.WINDOW_MINIMIZE:
+        case types.WINDOW_MINIMIZE:
             newState.windows = newState.windows.map(window => {
-                if (window.key === action.key && window.props.minimizeable){
+                if (window.key === action.key && window.props.minimizeable) {
                     window.props.active = !action.minimize;
                     window.props.minimized = action.minimize;
                 }
+                if (!action.minimize) {
+                    window.props.active = (window.key === action.key && !action.minimize);
+                }
                 return window;
-            });            
+            });
             break;
-        case actionType.WINDOW_MAXIMIZE:
+        case types.WINDOW_MAXIMIZE:
             newState.windows = newState.windows.map(window => {
                 var props = { ...window.props, style: { ...window.props.style } };
                 props.active = (window.key === action.key);
@@ -95,8 +107,8 @@ const reducer = (state = initialState, action) => {
                 props.style.zIndex = (window.key === action.key) ? 2 : 1;
                 return { ...window, props };
             });
-            break;        
-        case actionType.WINDOW_START_TRANSFORM:
+            break;
+        case types.WINDOW_START_TRANSFORM:
             target = newState.windows.find(window => window.key === action.key);
             if (target.props.maximized) break;
             newState.transformKey = action.key;
@@ -109,28 +121,26 @@ const reducer = (state = initialState, action) => {
             newState.startHeight = target.props.style.height;
             break;
 
-        case actionType.WINDOW_TRANSFORM:
+        case types.WINDOW_TRANSFORM:
             if (!global.window) break;
             newState.windows = newState.windows.map(window => {
                 var props = { ...window.props, style: { ...window.props.style } };
                 if (window.key === newState.transformKey) {
+                    const dx = action.x - newState.startX;
+                    const dy = action.y - newState.startY;
                     if (newState.transformType === TRANSFORM_MOVE) {
-                        const dx = newState.startLeft + action.x - newState.startX;
-                        const dy = newState.startTop + action.y - newState.startY;
-                        props.style.top = Math.min(Math.max(0, dy), global.window.innerHeight - props.style.height - 50);
-                        props.style.left = Math.min(Math.max(0, dx), global.window.innerWidth - props.style.width);
+                        props.style.top = Math.max(0, newState.startTop + dy);
+                        props.style.left = Math.max(0, newState.startLeft + dx);
                     } else if (newState.transformType === TRANSFORM_RESIZE) {
-                        const dx = newState.startWidth + action.x - newState.startX;
-                        const dy = newState.startHeight + action.y - newState.startY;
-                        props.style.height = Math.min(Math.max(300, dy), global.window.innerHeight - props.style.top - 50);
-                        props.style.width = Math.min(Math.max(400, dx), global.window.innerWidth - props.style.left);
+                        props.style.width = Math.max(DEFAULT_WIDTH, newState.startWidth + dx);
+                        props.style.height = Math.max(DEFAULT_HEIGHT, newState.startHeight + dy);
                     }
                 }
-                return { ...window, props: { ...props, style: {...props.style} } };
+                return { ...window, props: { ...props, style: { ...props.style } } };
             });
             break;
 
-        case actionType.WINDOW_MINIMIZE_ALL:
+        case types.WINDOW_MINIMIZE_ALL:
             newState.windows = newState.windows.map(window => {
                 window.props.minimized = true;
                 window.props.active = false;
@@ -138,11 +148,11 @@ const reducer = (state = initialState, action) => {
             });
             break;
 
-        case actionType.WINDOW_END_TRANSFORM:
+        case types.WINDOW_END_TRANSFORM:
             newState.transformKey = null;
             break;
 
-        case actionType.SET_FOOTER:
+        case types.SET_FOOTER:
             newState.windows = newState.windows.map(window => {
                 if (window.key === action.key) {
                     window.props.footer = action.footer;
@@ -151,7 +161,7 @@ const reducer = (state = initialState, action) => {
             });
             break;
 
-        case actionType.SET_LOADING:
+        case types.SET_LOADING:
             var loadingWindow = newState.windows.find(window => window.key === action.key);
 
             if (loadingWindow) {
@@ -162,7 +172,7 @@ const reducer = (state = initialState, action) => {
 
             break;
 
-        case actionType.SET_DATA:
+        case types.SET_DATA:
             var winKey = 0;
             const icons = (action.data.icons || []);
             const windows = (action.data.windows || []).map(window => {
