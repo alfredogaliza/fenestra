@@ -110,6 +110,7 @@ const reducer = (state = initialState, action) => {
             break;
 
         case actionType.WINDOW_TRANSFORM:
+            if (!global.window) break;
             newState.windows = newState.windows.map(window => {
                 var props = { ...window.props, style: { ...window.props.style } };
                 if (window.key === newState.transformKey) {
