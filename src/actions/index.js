@@ -130,11 +130,6 @@ export const boundTaskbarActions = dispatch => ({
     activate: (key, active = true) => dispatch(activate(key, active))
 });
 
-export const boundTemplateProps = (key) => (state) => ({
-    fenestra: state.fenestra,
-    window: state.fenestra.windows.find(window => window.key === key)
-});
-
 export const boundTemplateActions = (key) => dispatch => ({
     open:           (props, template, templateProps) => dispatch(open(props, template, templateProps)),
     activate:       (active = true) => dispatch(activate(key, active)),

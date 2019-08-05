@@ -11,6 +11,7 @@ import {
     DEFAULT_WIDTH,
     DEFAULT_HEIGHT
 } from '../actions';
+import { boundTemplateActions } from 'fenestra/dist/actions';
 
 const initialState = {
     winKey: 0,
@@ -29,7 +30,7 @@ const initialState = {
 
 function newWindow(key, props, template, templateProps) {
 
-    const Template = connect(boundTemplateProps(key), boundTemplateActions(key))(template);
+    const Template = connect(undefined, boundTemplateActions(key))(template);
 
     const top = (key % 10) * 50 + 10;
     const left = (key % 10) * 50 + 10;
