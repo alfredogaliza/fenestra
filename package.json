@@ -1,12 +1,13 @@
 {
   "name": "fenestra",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Uma API de janelas baseada em react/redux",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel ./src --out-dir ./dist -s inline || exit 0",
-    "publishOnly": "babel ./src --out-dir ./dist -s inline"
+    "scss": "node-sass ./src/styles/ -o ./src/styles",
+    "transpile": "babel ./src --out-dir ./dist -s inline",
+    "build": "npm run scss && npm run transpile"
   },
   "repository": {
     "type": "git",
@@ -27,12 +28,11 @@
   },
   "homepage": "https://github.com/alfredogaliza/fenestra#readme",
   "dependencies": {
-    "load-styles": "^2.0.0",
-    "postcss": "^7.0.17"
+    "load-styles": "^2.0.0"
   },
   "peerDependencies": {
     "bootstrap": "^4",
-    "font-awesome": "^5",
+    "font-awesome": "^4.7.0",
     "react": "^16.8.6",
     "react-redux": "^7.1.0",
     "redux": "^4.0.4"
@@ -43,14 +43,19 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "babel": "^6.23.0",
     "babel-generator": "^6.26.1",
-    "babel-plugin-inline-import-data-uri": "^1.0.1",
     "babel-plugin-transform-import-styles": "0.0.11",
     "babel-template": "^6.26.0",
+    "bootstrap": "^4.3.1",
     "browser-env": "^3.2.6",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.4.1",
+    "node-sass": "^4.12.0",
+    "popper.js": "^1.15.0",
+    "postcss": "^7.0.17",
     "react": "^16.8.6",
     "react-redux": "^7.1.0",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "sass-loader": "^7.1.0"
   }
 }
