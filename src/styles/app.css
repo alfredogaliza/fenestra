@@ -15,6 +15,14 @@
   bottom: 50px;
   overflow: auto; }
 
+.fenestra-desktop-maximized
+.fenestra-desktop-windows {
+  overflow: hidden; }
+
+.fenestra-desktop-moving
+.fenestra-desktop-windows {
+  overflow: hidden; }
+
 .fenestra-desktop-icons {
   background-color: transparent;
   position: absolute;
@@ -34,7 +42,7 @@
   margin: 5px 0 0 5px;
   padding: 0px;
   display: block;
-  background-color: #404060; }
+  background-color: #404040 !important; }
 
 .fenestra-desktop-windows-holder {
   position: relative;
@@ -82,9 +90,9 @@
   background-color: #202020; }
 
 .fenestra-taskbar-button-desktop {
-  display: block;
+  display: flex !important;
   margin: 5px;
-  margin-left: auto;
+  margin-left: auto !important;
   width: 40px;
   height: 40px;
   white-space: nowrap;
@@ -111,7 +119,8 @@
   left: 0px;
   right: 0px;
   bottom: 0px;
-  border-radius: 0px; }
+  border-radius: 0px;
+  border: none; }
 
 .fenestra-window-minimized {
   display: none; }
@@ -153,7 +162,7 @@
 
 .fenestra-window-body {
   width: 100%;
-  padding: 15px;
+  padding: 0;
   position: relative;
   overflow: auto;
   display: flex;
@@ -177,6 +186,10 @@
   border-right: solid #404040 1px;
   border-bottom: solid #404040 1px; }
 
+.fenestra-window-maximized
+.fenestra-window-footer {
+  border: none; }
+
 .fenestra-window-resize {
   cursor: nwse-resize;
   color: black !important;
@@ -188,6 +201,10 @@
   appearance: none;
   border: none;
   background-color: transparent; }
+
+.fenestra-window-maximized
+.fenestra-window-resize {
+  display: none; }
 
 .fenestra-desktop-background {
   position: absolute;
@@ -228,3 +245,30 @@
   text-align: center;
   z-index: 100000;
   font-size: 60pt; }
+
+.fenestra-taskbar-button-windows {
+  display: none !important; }
+
+@media (max-width: 576px) {
+  body {
+    overflow-y: hidden; }
+  .fenestra-taskbar-button-windows {
+    display: block !important; }
+  .fenestra-taskbar-button-windows:focus + .fenestra-taskbar-buttons {
+    display: block !important;
+    bottom: 50px;
+    left: 0px;
+    right: 0px;
+    max-height: 200px; }
+  .fenestra-taskbar-buttons {
+    display: none;
+    position: absolute;
+    background-color: #F0F0F0;
+    border: solid white 1px;
+    padding: 5px;
+    overflow-y: auto;
+    height: auto; }
+  .fenestra-taskbar-buttons .fenestra-taskbar-button {
+    display: block;
+    width: 100%;
+    margin: 5px 0px; } }

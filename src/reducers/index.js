@@ -2,15 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import * as types from '../actions/types';
-import WindowTemplate from '../components/WindowTemplate';
+
+import { bindWindow } from '../components/Window';
+
 import {
     TRANSFORM_MOVE,
     TRANSFORM_RESIZE,
     DEFAULT_PROPS,
-    boundTemplateProps,
     DEFAULT_WIDTH,
     DEFAULT_HEIGHT
 } from '../actions';
+
 import { boundTemplateActions } from 'fenestra/dist/actions';
 
 const initialState = {
@@ -28,7 +30,9 @@ const initialState = {
     transformType: null
 }
 
-function newWindow(key, props, template, templateProps) {
+const EmptyTemplate = () => <span />;
+
+function newWindow(key, props = {style: {}}, template = EmptyTemplate, templateProps = {}) {
 
     const Template = connect(undefined, boundTemplateActions(key))(template);
 
@@ -42,16 +46,17 @@ function newWindow(key, props, template, templateProps) {
             ...props,
             style: {
                 ...DEFAULT_PROPS.style,
-                ...props.style,
+                ...(props.style || {}),
                 top, left
             }
         },
-        component: WindowTemplate(key),
+        component: bindWindow(key),
         content: <Template {...templateProps} />
     };
+    
 }
 
-const reducer = (state = initialState, action) => {
+const fenestraReducer = (state = initialState, action) => {
 
     var newState = { ...state };
     var target = null;
@@ -109,7 +114,7 @@ const reducer = (state = initialState, action) => {
                 return { ...window, props };
             });
             break;
-        case types.WINDOW_START_TRANSFORM:
+        case types.WINDOW_START_TRANSFORM:            
             target = newState.windows.find(window => window.key === action.key);
             if (target.props.maximized) break;
             newState.transformKey = action.key;
@@ -122,7 +127,7 @@ const reducer = (state = initialState, action) => {
             newState.startHeight = target.props.style.height;
             break;
 
-        case types.WINDOW_TRANSFORM:
+        case types.WINDOW_TRANSFORM:            
             if (!global.window) break;
             newState.windows = newState.windows.map(window => {
                 var props = { ...window.props, style: { ...window.props.style } };
@@ -151,6 +156,7 @@ const reducer = (state = initialState, action) => {
 
         case types.WINDOW_END_TRANSFORM:
             newState.transformKey = null;
+            newState.transformType = null;
             break;
 
         case types.SET_FOOTER:
@@ -175,8 +181,8 @@ const reducer = (state = initialState, action) => {
 
         case types.SET_DATA:
             var winKey = 0;
-            const icons = (action.data.icons || []);
-            const windows = (action.data.windows || []).map(window => {
+            const icons = action.data.icons;
+            const windows = action.data.windows.map(window => {
                 return newWindow(winKey++, window.props, window.template, window.templateProps);
             });
 
@@ -196,4 +202,4 @@ const reducer = (state = initialState, action) => {
 
 }
 
-export default reducer;
+export default fenestraReducer;

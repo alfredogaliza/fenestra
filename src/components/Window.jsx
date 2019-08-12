@@ -1,36 +1,41 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import PropTypes from 'prop-types';
 import { boundWindowActions } from '../actions';
 
-/**
- * props: {
- *   title: string,
- *   children: React,
- *   minimized: bool,
- *   maximized: bool,
- *   moveable: bool,
- *   active: bool,
- *   resizeable: bool,
- *   activate: () => void,
- *   minimize: () => void,
- *   maximize: () => void,
- *   deminimize: () => void,
- *   demaximize: () => void,
- *   close: () => void,
- *   startResize: (x, y) => void,
- *   style: {
- *    top: int,
- *    left: int,
- *    width: int,
- *    height: int,
- *    zIndex: int
- *   }
- * }
- * 
- * 
- */
-class WindowTemplate extends React.Component {
+class Window extends React.Component {
+
+    static propTypes = {
+        title: PropTypes.string.isRequired,
+        children: PropTypes.element,
+        isLoading: PropTypes.bool,
+        open: PropTypes.func,
+        activate: PropTypes.func,
+        minimize: PropTypes.func,
+        maximize: PropTypes.func,
+        startMove: PropTypes.func,
+        startResize: PropTypes.func,
+        close: PropTypes.func,
+        setLoading: PropTypes.func,
+        setFooter: PropTypes.func,
+        setData: PropTypes.func,
+    }
+
+    static defaultProps = {
+        title: "Nova Janela",
+        children: null,
+        isLoading: false,
+        open: () => undefined,
+        activate: () => undefined,
+        minimize: () => undefined,
+        maximize: () => undefined,
+        startMove: () => undefined,
+        startResize: () => undefined,
+        close: () => undefined,
+        setLoading: () => undefined,
+        setFooter: () => undefined,
+        setData: () => undefined
+    }
 
     close = (event) => {
         event.stopPropagation();
@@ -65,10 +70,17 @@ class WindowTemplate extends React.Component {
                     (this.props.maximized ? "fenestra-window-maximized" : "") + " " +
                     (this.props.minimized ? "fenestra-window-minimized" : "")
                 }
-                style={!this.props.maximized? this.props.style : null}
+                style={!this.props.maximized ? this.props.style : null}
                 onMouseDown={() => this.props.activate()}
+                onTouchStart={() => this.props.activate()}
             >
-                <div className="fenestra-window-title" style={{ borderRadius: this.props.maximized ? 0 : undefined }} onDoubleClick={(e) => this.toggleMaximize(e)} onMouseDown={e => this.props.startMove(e.pageX, e.pageY)}>
+                <div
+                    className="fenestra-window-title"
+                    style={{ borderRadius: this.props.maximized ? 0 : undefined }}
+                    onDoubleClick={(e) => this.toggleMaximize(e)}
+                    onMouseDown={e => this.props.startMove(e.pageX, e.pageY)}
+                    onTouchStart={event => this.props.startMove(event.touches[0].pageX, event.touches[0].pageY)}
+                >
 
                     <span>{this.props.title}</span>
 
@@ -94,9 +106,9 @@ class WindowTemplate extends React.Component {
                 <div className="fenestra-window-footer">
                     {this.props.footer}
                     <button type="button"
-                        style={{ display: ((this.props.maximized || !this.props.resizeable) ? 'none' : 'block') }}
                         className="fenestra-window-resize"
-                        onMouseDown={({ pageX, pageY }) => this.props.startResize(pageX, pageY)}>
+                        onMouseDown={({ pageX, pageY }) => this.props.startResize(pageX, pageY)}
+                        onTouchStart={e => this.props.startResize(e.touches[0].pageX, e.touches[0].pageY)}>
                         <i className="fa fa-expand fa-flip-horizontal"></i>
                     </button>
                 </div>
@@ -106,13 +118,13 @@ class WindowTemplate extends React.Component {
     }
 }
 
-const Window = key => {
+export const bindWindow = key => {
 
     const mapStateToProps = state => ({
         isLoading: state.fenestra.windows.find(window => window.key === key).isLoading
     });
 
-    return connect(mapStateToProps, boundWindowActions(key))(WindowTemplate);
+    return connect(mapStateToProps, boundWindowActions(key))(Window);
 }
 
 export default Window;

@@ -1,5 +1,4 @@
 import * as actionType from './types';
-import EmptyTemplate from '../components/EmptyTemplate';
 
 export const DEFAULT_WIDTH = 300;
 export const DEFAULT_HEIGHT = 200;
@@ -24,6 +23,8 @@ export const DEFAULT_PROPS = {
     footer: "",
     title: "Nova Janela"
 };
+
+const EmptyTemplate = (props) => null;
 
 export const open = (props = DEFAULT_PROPS, template = EmptyTemplate, templateProps = {}) => {
     const action = {
@@ -104,9 +105,8 @@ export const setFooter = (key, footer) => ({
 export const boundDesktopProps = state => ({
     icons: state.fenestra.icons,
     windows: state.fenestra.windows,
-    maxWidth: Math.max(0, ...state.fenestra.windows.map(window => window.props.style.left + window.props.style.width)),
-    maxHeight: Math.max(0, ...state.fenestra.windows.map(window => window.props.style.top + window.props.style.height)),
-    isLoading: state.fenestra.isLoading
+    isMaximized: state.fenestra.windows.some(window => window.props.active && window.props.maximized),
+    isMoving: state.fenestra.transformType !== null && state.fenestra.transformKey !== null
 });
 
 export const boundDesktopActions = dispatch => ({
@@ -126,7 +126,6 @@ export const boundDesktopActions = dispatch => ({
 });
 
 export const boundTaskbarActions = dispatch => ({
-    minimize: (key, min = true) => dispatch(minimize(key, min)),
     activate: (key, active = true) => dispatch(activate(key, active))
 });
 
@@ -153,3 +152,22 @@ export const boundWindowActions = (key) => dispatch => ({
     setFooter:      (footer = null) => dispatch(setFooter(key, footer)),
     setData:        (data) => dispatch(setData(data))
 });
+
+export const boundIconActions = dispatch => ({
+    openIcon: (icon) => icon.window? dispatch(open(icon.window.props, icon.window.template, icon.window.templateProps)) : false
+});
+
+
+export default {
+    open,
+    close,
+    activate,
+    minimize,
+    maximize,
+    startTransform,
+    transform,
+    endTransform,
+    setLoading,
+    setFooter,
+    setData
+};
