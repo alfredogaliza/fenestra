@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
 
-
-
 export const windowPropTypes = PropTypes.shape({
     props: PropTypes.shape({
         style: PropTypes.object
@@ -37,7 +35,6 @@ export const appPropTypes = {
         ),
         icons: PropTypes.arrayOf(
             iconPropTypes
-        ), 
-        store: PropTypes.object                    
+        )
     })
 }

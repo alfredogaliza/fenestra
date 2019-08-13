@@ -181,8 +181,8 @@ const fenestraReducer = (state = initialState, action) => {
 
         case types.SET_DATA:
             var winKey = 0;
-            const icons = action.data.icons;
-            const windows = action.data.windows.map(window => {
+            const icons = (action.data.icons || []);
+            const windows = (action.data.windows || []).map(window => {
                 return newWindow(winKey++, window.props, window.template, window.templateProps);
             });
 

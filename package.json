@@ -1,13 +1,14 @@
 {
   "name": "fenestra",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Uma API de janelas baseada em react/redux",
-  "main": "dist/index.js",
+  "main": "build/index.js",
   "scripts": {
+    "start": "npm run build && webpack-dev-server --inline --hot",
     "test": "echo \"Error: no test specified\" && exit 1",
     "scss": "node-sass ./src/styles/ -o ./src/styles",
-    "transpile": "babel ./src --out-dir ./dist -s inline",
-    "build": "npm run scss && npm run transpile"
+    "transpile": "npm run scss && babel src --out-dir build",
+    "build": "npm run transpile && webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -47,16 +48,16 @@
     "babel-plugin-transform-import-styles": "0.0.11",
     "babel-template": "^6.26.0",
     "bootstrap": "^4.3.1",
-    "browser-env": "^3.2.6",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.4.1",
     "node-sass": "^4.12.0",
-    "popper.js": "^1.15.0",
     "postcss": "^7.0.17",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-redux": "^7.1.0",
     "redux": "^4.0.4",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.8.0"
   }
 }
