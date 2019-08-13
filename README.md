@@ -1,16 +1,16 @@
 
 # Fenestra
 
-Fenestra é uma biblioteca para implementação de um Desktop baseado em janelas. Construído sobre React/Redux, você poderá fornecer seus próprios redutores para integrar a Store do Desktop. A interface do usuário se baseia no Bootstrap 4 e nos ícones do Font Awesome 4.7.
+Fenestra é uma biblioteca para implementação de um Desktop baseado em janelas. Construído sobre React/Redux, você poderá fornecer seus próprios redutores para integrar a Store do Desktop. A interface do usuário se baseia no Bootstrap 4 e nos ícones do Font Awesome 4.7. A Biblioteca também produz um design responsivo bastante adaptado para dispositivos móveis.
 
 ![Captura de tela de 2019-08-04 11-20-41](https://user-images.githubusercontent.com/6832383/62424798-46cc4b00-b6aa-11e9-934c-b99eb3c6e209.png)
 
 # Como utilizar esta biblioteca?
-1. Instale a partir do npm:
+## Instale a partir do npm:
 ```
 $ npm i fenestra
 ```
-2. Importe a API para o seu projeto
+## Importe a API para o seu projeto
 ```
 import Fenestra from 'fenestra';
 ```
@@ -18,7 +18,7 @@ ou
 ```
 const Fenestra = require('fenestra');
 ```
-3. Adicione uma carga inicial de dados
+## Adicione uma carga inicial de dados
 ```
 const data = {
   windows: [
@@ -44,7 +44,7 @@ const data = {
    ]
  }
  ```
- 4. Instancie sua aplicação com os dados iniciais
+ ## Instancie sua aplicação com os dados iniciais
  ```
  ReactDOM.render(<Fenestra data={data} />, document.getElementById("root"));
  ```
@@ -104,22 +104,39 @@ Template é apenas um componente React injetado em uma Janela. Formulários, pá
 
 # Posso utilizar um template conectado ao redux?
 
-Boas notícias. Sim! Basta passar seus redutores ao Fenestra que ele se encarregará de criar a store:
+Boas notícias. Sim! Os dados da API Fenestra estão disponíveis no namespace fenestra e podem ser acessado através da função connect do react-redux:
 ```
 ...
-import myReducer1 from './reducers/reducer1';
-import myReducer2 from './reducers/reducer2';
-const reducers = [myReducer1, myReducer2];
+class MyComponent extends React.Component {
+  ...
+}
+
+const mapStateToProps = (state) => {
+  fenestra: state.fenestra
+}
+
+export default connect(mapStateToProps)(MyComponent);
+
+```
+Você ainda pode usar sua própria Store, observando a utilização do redutor do Fenestra e o componente Desktop:
+```
 ...
-ReactDOM.render(<Fenestra reducers={reducers} />, document.getElementByIdd('root'));
-```
-# Não gostei da cor de fundo do desktop, posso colocar minha própria imagem?
-Sim, apenas passe a propriedade background para o Fenestra:
-```
-import background from './images/background.png';
-ReactDOM.render(<Fenestra background={background} />, document.getElementByIdd('root'));
+import myReducer from './reducers';
+import fenestra from 'fenestra/reducers';
+import * as fenestraActions from 'fenestra/actions';
+import {Desktop} from 'fenestra';
+import {createStore, combineReducers} from 'redux';
+import {Provider} from 'react-redux';
+...
+const store = createStore(combineReducers({myReducer, fenestra}));
+store.dispatch(fenestraActions.setData({...}));
+...
+ReactDOM.render(
+  <Provider store={store}>
+    <Desktop />
+  </Provider>, document.getElementByIdd('root'));
 ```
 
-# Também não gostei da cor do tema, posso escrever meu próprio css?
+# Posso mudar a cor do tema ou colocar uma imagem de background no desktop?
 Sim, as janelas são criadas com classes CSS específicas que vc pode sobrescrever com seu próprio arquivo. Dê uma olhada na folha de estilos do Fenestra:
 ![app.css](https://github.com/alfredogaliza/fenestra/blob/master/src/styles/app.css)
