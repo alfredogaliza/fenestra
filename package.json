@@ -1,6 +1,6 @@
 {
   "name": "fenestra",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Uma API de janelas baseada em react/redux",
   "main": "build/index.js",
   "scripts": {

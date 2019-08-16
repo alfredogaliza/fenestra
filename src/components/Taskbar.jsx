@@ -1,28 +1,56 @@
+/**
+ * @module Fenestra/Components/Taskbar
+ */
+
 import React from 'react';
 import { connect } from 'react-redux';
-import { boundTaskbarActions } from '../actions';
+import { boundTaskbarActions, boundTaskbarProps } from '../actions';
 import { taskbarPropTypes } from '../prop-types';
 
+/**
+ * Componente da Barra de Tarefas da Aplicação Fenestra.
+ * @extends {React.Component}
+ */
 class Taskbar extends React.Component {
 
-    static propTypes = taskbarPropTypes;
+    /**
+     * PropTypes do Componente
+     */
+    static propTypes = taskbarPropTypes;    
 
+    /**
+     * Propriedade padrão do componente.
+     */
     static defaultProps = {
         windows: [],
         activate: () => undefined
     }
 
+    /**
+     * Alterna a visualização/ativação da janela correspondente ao
+     * botão clicado.
+     * @method
+     * @param {WindowState} window
+     */
     toggle(window) {
         this.props.minimize(window.key, false);
         this.props.activate(window.key, !window.active);
     }
 
+    /**
+     * Minimiza todas as janelas.
+     * @method
+     */
     minimizeAll = () => {
         this.props.windows.forEach(window => {
             this.props.minimize(window.key);
         });
     }
 
+    /**
+     * Método de renderização do componente.
+     * @method
+     */
     render() {
         const buttons = this.props.windows.map(window => {
             return (
@@ -47,8 +75,4 @@ class Taskbar extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    windows: state.fenestra.windows
-});
-
-export default connect(mapStateToProps, boundTaskbarActions)(Taskbar);
+export default connect(boundTaskbarProps, boundTaskbarActions)(Taskbar);

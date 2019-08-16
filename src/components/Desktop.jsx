@@ -1,3 +1,8 @@
+/**
+ * @module Fenestra/Components/Desktop
+ * @see module:Fenestra/Actions~BoundDesktopActions
+ */
+
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,13 +12,32 @@ import { boundDesktopActions, boundDesktopProps } from '../actions';
 import Taskbar from "./Taskbar";
 import { iconPropTypes, windowStatePropTypes } from '../prop-types';
 
+
+ /**
+ * @typedef {Object} IconData - Dados de um ícone a ser posicionado no Desktop
+ * @property {string} icon - Classe css referente a um ícone do Font Awesome 4.7
+ * @property {string} title - Título abaixo do ícone
+ * @property {module:Fenestra/Components/Window~WindowData} window - Propriedades da Janela a ser aberta ao clicar no ícone
+ */
+
+/**
+ * Componente do Desktop da Aplicação Fenestra.
+ * @extends {React.Component}
+ */
 class Desktop extends React.Component {
 
-    constructor(props){
-        super(props);
-        this.windowsRef = React.createRef();
-    }
 
+    /**
+     * Referência ao Container das Janelas.
+     */
+    windowsRef = React.createRef();
+
+    /**
+     * Método chamado quando o desktop é atualizado. Caso haja uma janela maximizada,
+     * o conteiner deverá ser rolado até a posição inicial para que não
+     * haja visão parcial da janela.
+     * @method
+     */
     componentDidUpdate() {
         if (this.props.isMaximized){
             this.windowsRef.current.scrollTop = 0;
@@ -21,6 +45,9 @@ class Desktop extends React.Component {
         }
     }
 
+    /**
+     * PropTypes do componente.
+     */
     static propTypes = {
         icons: PropTypes.arrayOf(iconPropTypes),
         windows: PropTypes.arrayOf(windowStatePropTypes),
@@ -41,6 +68,9 @@ class Desktop extends React.Component {
         setData: PropTypes.func
     }
 
+    /**
+     * Propriedade padrão do componente.
+     */
     static defaultProps = {
         icons: [],
         windows: [],
@@ -61,6 +91,10 @@ class Desktop extends React.Component {
         setData: () => undefined
     }
 
+    /**
+     * Método de renderização do Componente
+     * @method
+     */
     render() {
 
         const icons = this.props.icons.map((icon, key) => {

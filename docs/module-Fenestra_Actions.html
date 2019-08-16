@@ -1,0 +1,6084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: Fenestra/Actions</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: Fenestra/Actions</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Módulo de Ações para redução do Store do Redux.</div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="module-Fenestra_Reducers.html">module:Fenestra/Reducers</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id=".DEFAULT_HEIGHT"><span class="type-signature">(static, constant) </span>DEFAULT_HEIGHT<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Altura Padrão da janela
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line23">line 23</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".DEFAULT_WIDTH"><span class="type-signature">(static, constant) </span>DEFAULT_WIDTH<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Largura Padrão da janela
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line20">line 20</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~DEFAULT_PROPS"><span class="type-signature">(inner, constant) </span>DEFAULT_PROPS<span class="type-signature"> :<a href="module-Fenestra_Components_Window.html#~WindowProps">module:Fenestra/Components/Window~WindowProps</a></span></h4>
+
+
+
+
+<div class="description">
+    Propriedades padrão de uma nova janela
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="module-Fenestra_Components_Window.html#~WindowProps">module:Fenestra/Components/Window~WindowProps</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".activate"><span class="type-signature">(static) </span>activate<span class="signature">(key, active)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Ativa/Desativa a janela
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Reducers.html#~WinKey">module:Fenestra/Reducers~WinKey</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Chave da janela a ser ativada/desativada</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>active</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Ativar (true) ou Desativar (false)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line95">line 95</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Ação a ser despachada
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".boundDesktopActions"><span class="type-signature">(static) </span>boundDesktopActions<span class="signature">(dispatch)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~BoundDesktopActions">module:Fenestra/Actions~BoundDesktopActions</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Mapeia as propriedades do Desktop para o despachante da aplicação.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dispatch</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Dispatcher">module:Fenestra/Actions~Dispatcher</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Despachante de Ações</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line252">line 252</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Mapeamento das Propriedades
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~BoundDesktopActions">module:Fenestra/Actions~BoundDesktopActions</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".boundDesktopProps"><span class="type-signature">(static) </span>boundDesktopProps<span class="signature">(state)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~BoundDesktopProps">module:Fenestra/Actions~BoundDesktopProps</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Mapeia as propriedades do Desktop para estados da aplicação.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Reducers.html#~State">module:Fenestra/Reducers~State</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Estado da Aplicação</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line222">line 222</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Mapeamento Estado/Propriedade
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~BoundDesktopProps">module:Fenestra/Actions~BoundDesktopProps</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".boundIconActions"><span class="type-signature">(static) </span>boundIconActions<span class="signature">(dispatch)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~BoundIconActions">module:Fenestra/Actions~BoundIconActions</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Mapeia as propriedades do ícone para o despachante da aplicação.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dispatch</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Dispatcher">module:Fenestra/Actions~Dispatcher</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Despachante de Ações</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line387">line 387</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Mapeamento das Propriedades
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~BoundIconActions">module:Fenestra/Actions~BoundIconActions</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".boundTaskbarActions"><span class="type-signature">(static) </span>boundTaskbarActions<span class="signature">(dispatch)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~BoundTaskbarActions">module:Fenestra/Actions~BoundTaskbarActions</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Mapeia as propriedades da Barra de Tarefas para o despachante da aplicação.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dispatch</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Dispatcher">module:Fenestra/Actions~Dispatcher</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Despachante de Ações</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line279">line 279</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Mapeamento das Propriedades
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~BoundTaskbarActions">module:Fenestra/Actions~BoundTaskbarActions</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".boundTaskbarProps"><span class="type-signature">(static) </span>boundTaskbarProps<span class="signature">(state)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~BoundTaskbarProps">module:Fenestra/Actions~BoundTaskbarProps</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Mapeia as propriedades da Barra de Tarefas para estados da aplicação.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Reducers.html#~State">module:Fenestra/Reducers~State</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Estado da Aplicação</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line402">line 402</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Mapeamento Estado/Propriedade
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~BoundTaskbarProps">module:Fenestra/Actions~BoundTaskbarProps</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".boundTemplateActions"><span class="type-signature">(static) </span>boundTemplateActions<span class="signature">(key)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~BoundTemplateActions">module:Fenestra/Actions~BoundTemplateActions</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Mapeia as propriedades do Template de conteúdo da Janela para o despachante da aplicação.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Reducers.html#~WinKey">module:Fenestra/Reducers~WinKey</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">identificador da Janela</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line307">line 307</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Mapeamento das Propriedades
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~BoundTemplateActions">module:Fenestra/Actions~BoundTemplateActions</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".boundWindowActions"><span class="type-signature">(static) </span>boundWindowActions<span class="signature">(key)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~BoundWindowActions">module:Fenestra/Actions~BoundWindowActions</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Mapeia as propriedades da Janela para o despachante da aplicação.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Reducers.html#~WinKey">module:Fenestra/Reducers~WinKey</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">identificador da Janela</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line344">line 344</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Mapeamento das Propriedades
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~BoundWindowActions">module:Fenestra/Actions~BoundWindowActions</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".boundWindowProps"><span class="type-signature">(static) </span>boundWindowProps<span class="signature">(key)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~BoundWindowProps">module:Fenestra/Actions~BoundWindowProps</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Mapeia as propriedades da Janela para o Estado da aplicação.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Reducers.html#~WinKey">module:Fenestra/Reducers~WinKey</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">identificador da Janela</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line372">line 372</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Mapeamento das Propriedades
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~BoundWindowProps">module:Fenestra/Actions~BoundWindowProps</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".close"><span class="type-signature">(static) </span>close<span class="signature">(key)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fecha a janela
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Reducers.html#~WinKey">module:Fenestra/Reducers~WinKey</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Chave da janela a ser fechada</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line81">line 81</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Ação a ser despachada
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".endTransform"><span class="type-signature">(static) </span>endTransform<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Finaliza a transformação da janela.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line165">line 165</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Ação a ser despachada
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".maximize"><span class="type-signature">(static) </span>maximize<span class="signature">(key, maximize)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Maximiza/Demaximiza a janela
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Reducers.html#~WinKey">module:Fenestra/Reducers~WinKey</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Chave da janela a ser maximizada/demaximizada</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maximize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Maximizar (true) ou Demaximizar (false)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line123">line 123</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Ação a ser despachada
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".minimize"><span class="type-signature">(static) </span>minimize<span class="signature">(key, minimize)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Minimiza/Deminimiza a janela
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Reducers.html#~WinKey">module:Fenestra/Reducers~WinKey</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Chave da janela a ser minimizada/deminimizada</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>minimize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Minimizar (true) ou Deminimizar (false)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line109">line 109</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Ação a ser despachada
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".open"><span class="type-signature">(static) </span>open<span class="signature">(props, template, templateProps)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Abre uma nova janela.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Components_Window.html#~WindowProps">module:Fenestra/Components/Window~WindowProps</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Propriedades da nova janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>template</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Template a ser injetado no conteúdo da janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>templateProps</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Propriedades a serem injetadas no Template</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line62">line 62</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Ação a ser despachada
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".setData"><span class="type-signature">(static) </span>setData<span class="signature">(data)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Inicia uma nova sessão de janelas e ícones.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Dados da nova sessão a ser iniciada
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>windows</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="module-Fenestra_Components_Window.html#~WindowData">module:Fenestra/Components/Window~WindowData</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Janela a serem abertas no início da sessão</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>icons</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="module-Fenestra_Components_Desktop.html#~IconData">module:Fenestra/Components/Desktop~IconData</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Ícones a serem mostrados no Desktop</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line191">line 191</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Ação a ser despachada
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".setFooter"><span class="type-signature">(static) </span>setFooter<span class="signature">(key, footer)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Altera o rodapé da janela.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Reducers.html#~WinKey">module:Fenestra/Reducers~WinKey</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Chave da janela a ser alterada</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>footer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Mensagem de rodapé da janela</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line203">line 203</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Ação a ser despachada
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".setLoading"><span class="type-signature">(static) </span>setLoading<span class="signature">(key, isLoading)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Adiciona/Remove o backdrop de carregamento da janela.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Reducers.html#~WinKey">module:Fenestra/Reducers~WinKey</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Chave da janela a ser carregada</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isLoading</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Adiciona (true) ou remove (false) o backdrop</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line178">line 178</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Ação a ser despachada
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".startTransform"><span class="type-signature">(static) </span>startTransform<span class="signature">(key, x, y, transformType)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Inicia uma transformação de movimentação ou redimensionamento de uma janela.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Reducers.html#~WinKey">module:Fenestra/Reducers~WinKey</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Chave da janela a ser movimentada/redimensionada</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Posição X onde iniciou a transformação</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Posição Y onde iniciou a transformação</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>transformType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Actions_Types.html#~TransformType">module:Fenestra/Actions/Types~TransformType</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Tipo de transformação (TRANSFORM_MOVE ou TRANSFORM_RESIZE)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line139">line 139</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Ação a ser despachada
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".transform"><span class="type-signature">(static) </span>transform<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Movimenta ou redimensiona a janela.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Posição X onde acontece a transformação</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Posição Y onde acontece a transformação</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line153">line 153</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Ação a ser despachada
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="~Action">Action</h4>
+
+
+
+
+<div class="description">
+    Ação a ser despachada pelo Redux
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Actions_Types.html#~ActionType">module:Fenestra/Actions/Types~ActionType</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Tipo da Ação</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line7">line 7</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="~BoundDesktopActions">BoundDesktopActions</h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>open</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Abre uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>openIcon</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Abre a janela correspondente ao ícone</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>activate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Ativa uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>minimize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Minimiza uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maximize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Maximiza uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>startMove</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Inicia o movimento de uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>startResize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Inicia o redimensionamento de uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>move</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Move/Redimensiona a janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>endMove</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Finaliza a transformação da janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>close</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Fecha uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setLoading</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Altera o backdrop de uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setFooter</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Altera o rodapé de uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setData</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Reinicia a sessão com novos ícones e janelas</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line229">line 229</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="~BoundDesktopProps">BoundDesktopProps</h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>icons</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="module-Fenestra_Components_Desktop.html#~IconData">module:Fenestra/Components/Desktop~IconData</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Ícones do Desktop</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>windows</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="module-Fenestra_Components_Window.html#~WindowState">module:Fenestra/Components/Window~WindowState</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Janelas do Desktop</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isMaximized</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Determina se há alguma janela maximizada e ativa</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isMoving</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Determina se há alguma janela em movimento</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line208">line 208</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="~BoundIconActions">BoundIconActions</h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>openIcon</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Abre uma nova janela correspondente ao ícone</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line376">line 376</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="~BoundTaskbarActions">BoundTaskbarActions</h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>activate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Ativa uma janela</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line268">line 268</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="~BoundTaskbarProps">BoundTaskbarProps</h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>windows</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="module-Fenestra_Components_Window.html#~WindowState">module:Fenestra/Components/Window~WindowState</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Janelas do Desktop</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line391">line 391</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+
+    
+
+    
+    <h4 class="name" id="~BoundTemplateActions"><span class="type-signature"></span>BoundTemplateActions<span class="signature">(dispatch)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~TemplateActions">module:Fenestra/Actions~TemplateActions</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Ações do Template conectadas ao redux
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dispatch</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Dispatcher">module:Fenestra/Actions~Dispatcher</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Despachante da Ação</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line283">line 283</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~TemplateActions">module:Fenestra/Actions~TemplateActions</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+            
+                
+
+    
+
+    
+    <h4 class="name" id="~BoundWindowActions"><span class="type-signature"></span>BoundWindowActions<span class="signature">(dispatch)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~WindowActions">module:Fenestra/Actions~WindowActions</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Ações da Janela conectadas ao redux
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dispatch</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Dispatcher">module:Fenestra/Actions~Dispatcher</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Despachante da Ação</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line318">line 318</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~WindowActions">module:Fenestra/Actions~WindowActions</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+            
+                
+
+    
+
+    
+    <h4 class="name" id="~BoundWindowProps"><span class="type-signature"></span>BoundWindowProps<span class="signature">(dispatch)</span><span class="type-signature"> &rarr; {<a href="module-Fenestra_Actions.html#~WindowProps">module:Fenestra/Actions~WindowProps</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Propriedades da Janela conectadas ao redux
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dispatch</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Dispatcher">module:Fenestra/Actions~Dispatcher</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Despachante da Ação</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line357">line 357</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-Fenestra_Actions.html#~WindowProps">module:Fenestra/Actions~WindowProps</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+            
+                
+
+    
+
+    
+    <h4 class="name" id="~Dispatcher"><span class="type-signature"></span>Dispatcher<span class="signature">(action)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>action</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-Fenestra_Actions.html#~Action">module:Fenestra/Actions~Action</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Ação a ser despachada</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="~TemplateActions">TemplateActions</h4>
+
+
+
+
+<div class="description">
+    Ações do template de conteúdo da janela.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>open</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Abre uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>activate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Ativa uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>minimize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Minimiza uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maximize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Maximiza uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>close</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Fecha uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setLoading</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Altera o backdrop de uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setFooter</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Altera o rodapé de uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setData</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Reinicia a sessão com novos ícones e janelas</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line288">line 288</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="~WindowActions">WindowActions</h4>
+
+
+
+
+<div class="description">
+    Ações da janela.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>open</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Abre uma janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>activate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Ativa a janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>minimize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Minimiza a janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maximize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Maximiza a janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>startMove</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Inicia o movimento da janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>startResize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Inicia o redimensionamento da janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>close</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Fecha a janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setLoading</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Altera o backdrop da janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setFooter</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Altera o rodapé da janela</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setData</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Reinicia a sessão com novos ícones e janelas</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line323">line 323</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="~WindowProps">WindowProps</h4>
+
+
+
+
+<div class="description">
+    Ações da janela.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>isLoading</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">booleab</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Determina se a janela está com backdrop de carregamento</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="actions_index.js.html">actions/index.js</a>, <a href="actions_index.js.html#line362">line 362</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Fenestra_Actions.html">Fenestra/Actions</a></li><li><a href="module-Fenestra_Actions_Types.html">Fenestra/Actions/Types</a></li><li><a href="module-Fenestra_Components_App.html">Fenestra/Components/App</a></li><li><a href="module-Fenestra_Components_Desktop.html">Fenestra/Components/Desktop</a></li><li><a href="module-Fenestra_Components_Taskbar.html">Fenestra/Components/Taskbar</a></li><li><a href="module-Fenestra_Components_Window.html">Fenestra/Components/Window</a></li><li><a href="module-Fenestra_Reducers.html">Fenestra/Reducers</a></li></ul><h3>Classes</h3><ul><li><a href="module-Fenestra_Components_App-App.html">App</a></li><li><a href="module-Fenestra_Components_Desktop-Desktop.html">Desktop</a></li><li><a href="module-Fenestra_Components_Taskbar-Taskbar.html">Taskbar</a></li><li><a href="module-Fenestra_Components_Window.BoundWindow.html">BoundWindow</a></li><li><a href="module-Fenestra_Components_Window-Window.html">Window</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Aug 16 2019 04:14:50 GMT-0300 (GMT-03:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

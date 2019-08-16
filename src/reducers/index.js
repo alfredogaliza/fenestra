@@ -1,20 +1,63 @@
+/**
+ * Redutor da Store Redux.
+ * 
+ * @module Fenestra/Reducers 
+ * @see Fenestra/Actions
+ * @see Fenestra/Actions/Types
+ */
+
 import React from 'react';
 import { connect } from 'react-redux';
-
 import * as types from '../actions/types';
-
-import { bindWindow } from '../components/Window';
-
+import { BoundWindow } from '../components/Window';
+import { boundTemplateActions } from '../actions';
 import {
     TRANSFORM_MOVE,
-    TRANSFORM_RESIZE,
+    TRANSFORM_RESIZE
+} from '../actions/types';
+import {
     DEFAULT_PROPS,
     DEFAULT_WIDTH,
     DEFAULT_HEIGHT
 } from '../actions';
 
-import { boundTemplateActions } from 'fenestra/dist/actions';
+/**
+ * @typedef {number} TransformType Tipo de transformação a ser aplicada na janela
+ */
 
+ /**
+  * @typedef {number} WinKey Identificador de Janela
+  */
+
+/**
+ * @typedef {Object} Action Ação a ser executada pela acplicação conectada ao Redux
+ * @property {string} type Tipo da ação
+ */
+
+ /**
+  * @typedef {Object} IconState Estado de um ícone armazenado em um Store Redux.
+  */
+
+/**
+ * @typedef {Object} State Estado da aplicação Fenestra.
+ * @property {module:Fenestra/Reducers~WinKey} winKey Chave da próxima janela a ser aberta
+ * @property {boolean} isLoading Estado de carregamento da Aplicação
+ * @property {module:Fenestra/Components/Desktop~IconData[]} icons Lista de Ícones da Aplicação
+ * @property {module:Fenestra/Components/Window~WindowState[]} windows Lista de Janelas da Aplicação
+ * @property {number} startX Posição X onde se iniciou a transformação
+ * @property {number} startY Posição Y onde se iniciou a transformação
+ * @property {number} startTop Posição Y inicial da janela a ser transformada
+ * @property {number} startLeft Posição X inicial da janela a ser transformada
+ * @property {number} startWidth Largura inicial da janela a ser transformada
+ * @property {number} startHeight Altura inicial da janela a ser transformada
+ * @property {module:Fenestra/Reducers~WinKey} transformKey Identificador da janela a ser transformada
+ * @property {module:Fenestra/Reducers~TransformType} transformType Tipo de transformação a ser aplicada na janela
+ */
+ 
+/**
+ * Estado Inicial da Aplicação.
+ * @constant {module:Fenestra/Reducers~State} initialState Estado inicial
+ */
 const initialState = {
     winKey: 0,
     isLoading: false,
@@ -30,8 +73,22 @@ const initialState = {
     transformType: null
 }
 
-const EmptyTemplate = () => <span />;
+/**
+ * Template Vazio.
+ * @method
+ * @returns {null} Componente nulo
+ */
+const EmptyTemplate = () => null;
 
+/**
+ * Cria uma nova janela para ser utilizada pela aplicação Fenestra.
+ * @method
+ * @param {module:Fenestra/Reducers~WinKey} key Identificador da janela 
+ * @param {module:Fenestra/Components/Window~WindowProps} props Propriedades da janela
+ * @param {*} template Template a ser inserido na janela
+ * @param {*} templateProps  Propriedades do template
+ * @returns {module:Fenestra/Components/Window~WindowState} Estado de janela a ser adicionado à Aplicação
+ */
 function newWindow(key, props = {style: {}}, template = EmptyTemplate, templateProps = {}) {
 
     const Template = connect(undefined, boundTemplateActions(key))(template);
@@ -50,12 +107,20 @@ function newWindow(key, props = {style: {}}, template = EmptyTemplate, templateP
                 top, left
             }
         },
-        component: bindWindow(key),
+        component: BoundWindow(key),
         content: <Template {...templateProps} />
     };
     
 }
 
+/**
+ * Método redutor principal da aplicação Fenestra. Realiza a alteração de Estado
+ * após o processamento da ação.
+ * @method
+ * @param {module:Fenestra/Reducers~State} state Estado Atual da Aplicação, antes da ação.
+ * @param {module:Fenestra/Actions~Action} action Ação a ser executada
+ * @returns {module:Fenestra/Reducers~State} Novo estado após a redução
+ */
 const fenestraReducer = (state = initialState, action) => {
 
     var newState = { ...state };
@@ -143,14 +208,6 @@ const fenestraReducer = (state = initialState, action) => {
                     }
                 }
                 return { ...window, props: { ...props, style: { ...props.style } } };
-            });
-            break;
-
-        case types.WINDOW_MINIMIZE_ALL:
-            newState.windows = newState.windows.map(window => {
-                window.props.minimized = true;
-                window.props.active = false;
-                return window;
             });
             break;
 

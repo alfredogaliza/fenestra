@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Window.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Window.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Fenestra/Components/Window
+ */
+
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { boundWindowActions, boundWindowProps } from '../actions';
+
+/**
+ * @typedef {Object} WindowProps  - Propriedades da janela
+ * @property {Object} style - Propriedades de estilo da janela (top, left, width, height)
+ * @property {string} title - Título da janela
+ * @property {string} footer - Rodapé da janela
+ * @property {boolean} active - Indica se a janela está ativa
+ * @property {boolean} maximized - Indica se a janela está maximizada
+ * @property {boolean} minimized - Indica se a janela está minimizada
+ * @property {boolean} resizeable - Indica se a janela é redimensionável
+ * @property {boolean} moveable - Indica se a janela é movimentável
+ * @property {boolean} minimizeable - Indica se a janela é minimizável
+ * @property {boolean} closeable - Indica se a janela é fechável
+ */
+
+ /**
+ * @typedef {Object} WindowData - Dados de uma janela a ser aberta
+ * @property {module:Fenestra/Components/Window~WindowProps} props - Propriedades da Janela
+ * @property {*} template - Componente renderizável de conteúdo da janela
+ * @property {Object} templateProps - Propriedades a serem injetados no template
+ */
+
+ /**
+ * @typedef {Object} WindowState Estado de uma janela armazenado em um Store Redux.
+ * @property {module:Fenestra/Reducers~WinKey} key Identificador da Janela
+ * @property {module:Fenestra/Components/Window~WindowProps} props Propriedades da Janela
+ * @property {module:Fenestra/Components/Window~BoundWindow} component Componente da Janela conectada ao redux
+ * @property {*} content Componente do Conteúdo da Janela
+ */
+
+/**
+ * Janela da Aplicação Fenestra
+ * @extends {React.Component}
+ */
+class Window extends React.Component {
+
+    /**
+     * PropTypes do Componente.
+     */
+    static propTypes = {
+        title: PropTypes.string.isRequired,
+        children: PropTypes.element,
+        isLoading: PropTypes.bool,
+        open: PropTypes.func,
+        activate: PropTypes.func,
+        minimize: PropTypes.func,
+        maximize: PropTypes.func,
+        startMove: PropTypes.func,
+        startResize: PropTypes.func,
+        close: PropTypes.func,
+        setLoading: PropTypes.func,
+        setFooter: PropTypes.func,
+        setData: PropTypes.func,
+    }
+
+    /**
+     * Propriedades padrão do Componente
+     */
+    static defaultProps = {
+        title: "Nova Janela",
+        children: null,
+        isLoading: false,
+        open: () => undefined,
+        activate: () => undefined,
+        minimize: () => undefined,
+        maximize: () => undefined,
+        startMove: () => undefined,
+        startResize: () => undefined,
+        close: () => undefined,
+        setLoading: () => undefined,
+        setFooter: () => undefined,
+        setData: () => undefined
+    }
+
+    /**
+     * Fecha a janela.
+     * @method
+     * @param {Object} event Evento gerado pela ação
+     */
+    close = (event) => {
+        event.stopPropagation();
+        if (global.confirm("Deseja fechar esta janela: " + this.props.title + "?")) {
+            this.props.close();
+        }
+    }
+
+    /**
+     * Alterna o estado maximizado da janela;
+     * @method
+     * @param {Object} event Evento gerado pela ação
+     */
+    toggleMaximize = (event) => {
+        event.stopPropagation();
+        this.props.maximize(!this.props.maximized);
+    }
+
+    /**
+     * Minimiza a janela.
+     * @method
+     * @param {Object} event Evento gerado pela ação
+     */
+    minimize = (event) => {
+        event.stopPropagation();
+        this.props.minimize();
+    }
+
+    /**
+     * Renderiza o componente.
+     * @method
+     */
+    render() {
+
+        const loading = this.props.isLoading ? (
+            &lt;div className="fenestra-loading">
+                &lt;i className="fa fa-spinner fa-spin">&lt;/i>
+            &lt;/div>
+        ) : null;
+
+        return (
+            &lt;div
+                className={
+                    "fenestra-window " +
+                    (this.props.active ? "fenestra-window-active" : "") + " " +
+                    (this.props.maximized ? "fenestra-window-maximized" : "") + " " +
+                    (this.props.minimized ? "fenestra-window-minimized" : "")
+                }
+                style={!this.props.maximized ? this.props.style : null}
+                onMouseDown={() => this.props.activate()}
+                onTouchStart={() => this.props.activate()}
+            >
+                &lt;div
+                    className="fenestra-window-title"
+                    style={{ borderRadius: this.props.maximized ? 0 : undefined }}
+                    onDoubleClick={(e) => this.toggleMaximize(e)}
+                    onMouseDown={e => this.props.startMove(e.pageX, e.pageY)}
+                    onTouchStart={event => this.props.startMove(event.touches[0].pageX, event.touches[0].pageY)}
+                >
+
+                    &lt;span>{this.props.title}&lt;/span>
+
+                    &lt;div className="fenestra-window-title-buttons">
+                        &lt;button type="button" className={"btn btn-outline-secondary text-white btn-sm " + (this.props.minimizeable ? "" : "d-none")} onClick={(e) => this.minimize(e)}>
+                            &lt;i className="fa fa-window-minimize">&lt;/i>
+                        &lt;/button>&amp;nbsp;
+                        &lt;button type="button" className={"btn btn-outline-secondary text-white btn-sm " + (this.props.resizeable ? "" : "d-none")} onClick={(e) => this.toggleMaximize(e)}>
+                            &lt;i className={"fa fa-window-" + (this.props.maximized ? "restore" : "maximize")}>&lt;/i>
+                        &lt;/button>&amp;nbsp;
+                        &lt;button type="button" className={"btn btn-outline-secondary text-white btn-sm " + (this.props.closeable ? "" : "d-none")} onClick={(e) => this.close(e)}>
+                            &lt;i className="fa fa-remove">&lt;/i>
+                        &lt;/button>
+                    &lt;/div>
+
+                &lt;/div>
+
+                &lt;div className="fenestra-window-body">
+                    {this.props.children}
+                    {loading}
+                &lt;/div>
+
+                &lt;div className="fenestra-window-footer">
+                    {this.props.footer}
+                    &lt;button type="button"
+                        className="fenestra-window-resize"
+                        onMouseDown={({ pageX, pageY }) => this.props.startResize(pageX, pageY)}
+                        onTouchStart={e => this.props.startResize(e.touches[0].pageX, e.touches[0].pageY)}>
+                        &lt;i className="fa fa-expand fa-flip-horizontal">&lt;/i>
+                    &lt;/button>
+                &lt;/div>
+
+            &lt;/div>
+        );
+    }
+}
+
+/**
+ * @typedef {module:Fenestra/Components/Window~Window} BoundWindow Janela Conectada ao Store Redux
+ */
+
+/**
+ * Cria um novo componente com as propriedades ligadas à chave
+ * redux da janela aberta pelo Fenestra.
+ * @class
+ * @param {module:Fenestra/Reducers~WinKey} key Identificador da janela
+ * @returns {module:Fenestra/Components/Window~BoundWindow} Componente com as propriedades ligadas ao Redux
+ */
+export const BoundWindow = key => connect(boundWindowProps(key), boundWindowActions(key))(Window);
+
+export default Window;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Fenestra_Actions.html">Fenestra/Actions</a></li><li><a href="module-Fenestra_Actions_Types.html">Fenestra/Actions/Types</a></li><li><a href="module-Fenestra_Components_App.html">Fenestra/Components/App</a></li><li><a href="module-Fenestra_Components_Desktop.html">Fenestra/Components/Desktop</a></li><li><a href="module-Fenestra_Components_Taskbar.html">Fenestra/Components/Taskbar</a></li><li><a href="module-Fenestra_Components_Window.html">Fenestra/Components/Window</a></li><li><a href="module-Fenestra_Reducers.html">Fenestra/Reducers</a></li></ul><h3>Classes</h3><ul><li><a href="module-Fenestra_Components_App-App.html">App</a></li><li><a href="module-Fenestra_Components_Desktop-Desktop.html">Desktop</a></li><li><a href="module-Fenestra_Components_Taskbar-Taskbar.html">Taskbar</a></li><li><a href="module-Fenestra_Components_Window.BoundWindow.html">BoundWindow</a></li><li><a href="module-Fenestra_Components_Window-Window.html">Window</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Aug 16 2019 04:14:50 GMT-0300 (GMT-03:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

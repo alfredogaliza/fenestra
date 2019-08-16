@@ -1,10 +1,50 @@
+/**
+ * @module Fenestra/Components/Window
+ */
+
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { boundWindowActions } from '../actions';
+import { boundWindowActions, boundWindowProps } from '../actions';
 
+/**
+ * @typedef {Object} WindowProps  - Propriedades da janela
+ * @property {Object} style - Propriedades de estilo da janela (top, left, width, height)
+ * @property {string} title - Título da janela
+ * @property {string} footer - Rodapé da janela
+ * @property {boolean} active - Indica se a janela está ativa
+ * @property {boolean} maximized - Indica se a janela está maximizada
+ * @property {boolean} minimized - Indica se a janela está minimizada
+ * @property {boolean} resizeable - Indica se a janela é redimensionável
+ * @property {boolean} moveable - Indica se a janela é movimentável
+ * @property {boolean} minimizeable - Indica se a janela é minimizável
+ * @property {boolean} closeable - Indica se a janela é fechável
+ */
+
+ /**
+ * @typedef {Object} WindowData - Dados de uma janela a ser aberta
+ * @property {module:Fenestra/Components/Window~WindowProps} props - Propriedades da Janela
+ * @property {*} template - Componente renderizável de conteúdo da janela
+ * @property {Object} templateProps - Propriedades a serem injetados no template
+ */
+
+ /**
+ * @typedef {Object} WindowState Estado de uma janela armazenado em um Store Redux.
+ * @property {module:Fenestra/Reducers~WinKey} key Identificador da Janela
+ * @property {module:Fenestra/Components/Window~WindowProps} props Propriedades da Janela
+ * @property {module:Fenestra/Components/Window~BoundWindow} component Componente da Janela conectada ao redux
+ * @property {*} content Componente do Conteúdo da Janela
+ */
+
+/**
+ * Janela da Aplicação Fenestra
+ * @extends {React.Component}
+ */
 class Window extends React.Component {
 
+    /**
+     * PropTypes do Componente.
+     */
     static propTypes = {
         title: PropTypes.string.isRequired,
         children: PropTypes.element,
@@ -21,6 +61,9 @@ class Window extends React.Component {
         setData: PropTypes.func,
     }
 
+    /**
+     * Propriedades padrão do Componente
+     */
     static defaultProps = {
         title: "Nova Janela",
         children: null,
@@ -37,6 +80,11 @@ class Window extends React.Component {
         setData: () => undefined
     }
 
+    /**
+     * Fecha a janela.
+     * @method
+     * @param {Object} event Evento gerado pela ação
+     */
     close = (event) => {
         event.stopPropagation();
         if (global.confirm("Deseja fechar esta janela: " + this.props.title + "?")) {
@@ -44,16 +92,30 @@ class Window extends React.Component {
         }
     }
 
+    /**
+     * Alterna o estado maximizado da janela;
+     * @method
+     * @param {Object} event Evento gerado pela ação
+     */
     toggleMaximize = (event) => {
         event.stopPropagation();
         this.props.maximize(!this.props.maximized);
     }
 
+    /**
+     * Minimiza a janela.
+     * @method
+     * @param {Object} event Evento gerado pela ação
+     */
     minimize = (event) => {
         event.stopPropagation();
         this.props.minimize();
     }
 
+    /**
+     * Renderiza o componente.
+     * @method
+     */
     render() {
 
         const loading = this.props.isLoading ? (
@@ -118,13 +180,17 @@ class Window extends React.Component {
     }
 }
 
-export const bindWindow = key => {
+/**
+ * @typedef {module:Fenestra/Components/Window~Window} BoundWindow Janela Conectada ao Store Redux
+ */
 
-    const mapStateToProps = state => ({
-        isLoading: state.fenestra.windows.find(window => window.key === key).isLoading
-    });
-
-    return connect(mapStateToProps, boundWindowActions(key))(Window);
-}
+/**
+ * Cria um novo componente com as propriedades ligadas à chave
+ * redux da janela aberta pelo Fenestra.
+ * @class
+ * @param {module:Fenestra/Reducers~WinKey} key Identificador da janela
+ * @returns {module:Fenestra/Components/Window~BoundWindow} Componente com as propriedades ligadas ao Redux
+ */
+export const BoundWindow = key => connect(boundWindowProps(key), boundWindowActions(key))(Window);
 
 export default Window;
