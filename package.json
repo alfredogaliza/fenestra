@@ -1,13 +1,15 @@
 {
   "name": "fenestra",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Uma API de janelas baseada em react/redux",
-  "main": "build/index.js",
+  "main": "build/js/index.js",
   "scripts": {
     "start": "npm run build && webpack-dev-server --inline --hot",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "scss": "node-sass ./src/styles/ -o ./src/styles",
-    "transpile": "npm run scss && babel src --out-dir build",
+    "scss": "node-sass src/styles/scss -o src/styles/css",
+    "transpile": "npm run scss && npm run postcss && babel src --out-dir build/js",
+    "postcss": "postcss src/styles/css/*.css -u precss -u autoprefixer -d build/css/",
+    "docs": "jsdoc src/* -d docs",
     "build": "npm run transpile && webpack --mode production"
   },
   "repository": {
@@ -28,15 +30,10 @@
     "url": "https://github.com/alfredogaliza/fenestra/issues"
   },
   "homepage": "https://github.com/alfredogaliza/fenestra#readme",
-  "dependencies": {
-    "load-styles": "^2.0.0"
-  },
+  "dependencies": {},
   "peerDependencies": {
-    "bootstrap": "^4",
     "font-awesome": "^4.7.0",
-    "react": "^16.8.6",
-    "react-redux": "^7.1.0",
-    "redux": "^4.0.4"
+    "react": "^16.8.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -44,6 +41,7 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.6.1",
     "babel-generator": "^6.26.1",
     "babel-plugin-transform-import-styles": "0.0.11",
     "babel-template": "^6.26.0",
@@ -56,11 +54,12 @@
     "font-awesome": "^4.7.0",
     "node-sass": "^4.12.0",
     "postcss": "^7.0.17",
+    "postcss-cli": "^6.1.3",
+    "precss": "^4.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-redux": "^7.1.0",
     "redux": "^4.0.4",
-    "sass-loader": "^7.1.0",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.8.0"
