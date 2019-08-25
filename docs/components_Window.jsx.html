@@ -93,7 +93,7 @@ class Window extends React.Component {
      * Propriedades padrão do Componente
      */
     static defaultProps = {
-        title: "Nova Janela",
+        title: "New Window",
         children: null,
         isLoading: false,
         open: () => undefined,
@@ -115,7 +115,7 @@ class Window extends React.Component {
      */
     close = (event) => {
         event.stopPropagation();
-        if (global.confirm("Deseja fechar esta janela: " + this.props.title + "?")) {
+        if (global.confirm("Are you sure closing this window: " + this.props.title + "?")) {
             this.props.close();
         }
     }
@@ -165,23 +165,23 @@ class Window extends React.Component {
                 onTouchStart={() => this.props.activate()}
             >
                 &lt;div
-                    className="fenestra-window-title"
+                    className="fenestra-window-header"
                     style={{ borderRadius: this.props.maximized ? 0 : undefined }}
                     onDoubleClick={(e) => this.toggleMaximize(e)}
                     onMouseDown={e => this.props.startMove(e.pageX, e.pageY)}
                     onTouchStart={event => this.props.startMove(event.touches[0].pageX, event.touches[0].pageY)}
                 >
 
-                    &lt;span>{this.props.title}&lt;/span>
+                    &lt;span className="fenestra-window-header-title">{this.props.title}&lt;/span>
 
-                    &lt;div className="fenestra-window-title-buttons">
-                        &lt;button type="button" className={"btn btn-outline-secondary text-white btn-sm " + (this.props.minimizeable ? "" : "d-none")} onClick={(e) => this.minimize(e)}>
+                    &lt;div className="fenestra-window-header-buttons">
+                        &lt;button title={this.props.msgs.minimizeWindow} type="button" className={this.props.minimizeable ? "" : "d-none"} onClick={(e) => this.minimize(e)}>
                             &lt;i className="fa fa-window-minimize">&lt;/i>
                         &lt;/button>&amp;nbsp;
-                        &lt;button type="button" className={"btn btn-outline-secondary text-white btn-sm " + (this.props.resizeable ? "" : "d-none")} onClick={(e) => this.toggleMaximize(e)}>
+                        &lt;button title={this.props.msgs.maximizeWindow} type="button" className={this.props.resizeable ? "" : "d-none"} onClick={(e) => this.toggleMaximize(e)}>
                             &lt;i className={"fa fa-window-" + (this.props.maximized ? "restore" : "maximize")}>&lt;/i>
                         &lt;/button>&amp;nbsp;
-                        &lt;button type="button" className={"btn btn-outline-secondary text-white btn-sm " + (this.props.closeable ? "" : "d-none")} onClick={(e) => this.close(e)}>
+                        &lt;button title={this.props.msgs.closeWindow} type="button" className={this.props.closeable ? "" : "d-none"} onClick={(e) => this.close(e)}>
                             &lt;i className="fa fa-remove">&lt;/i>
                         &lt;/button>
                     &lt;/div>
@@ -195,7 +195,7 @@ class Window extends React.Component {
 
                 &lt;div className="fenestra-window-footer">
                     {this.props.footer}
-                    &lt;button type="button"
+                    &lt;button title={this.props.msgs.resizeWindow} type="button"
                         className="fenestra-window-resize"
                         onMouseDown={({ pageX, pageY }) => this.props.startResize(pageX, pageY)}
                         onTouchStart={e => this.props.startResize(e.touches[0].pageX, e.touches[0].pageY)}>
@@ -231,13 +231,13 @@ export default Window;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Fenestra_Actions.html">Fenestra/Actions</a></li><li><a href="module-Fenestra_Actions_Types.html">Fenestra/Actions/Types</a></li><li><a href="module-Fenestra_Components_App.html">Fenestra/Components/App</a></li><li><a href="module-Fenestra_Components_Desktop.html">Fenestra/Components/Desktop</a></li><li><a href="module-Fenestra_Components_Taskbar.html">Fenestra/Components/Taskbar</a></li><li><a href="module-Fenestra_Components_Window.html">Fenestra/Components/Window</a></li><li><a href="module-Fenestra_Reducers.html">Fenestra/Reducers</a></li></ul><h3>Classes</h3><ul><li><a href="module-Fenestra_Components_App-App.html">App</a></li><li><a href="module-Fenestra_Components_Desktop-Desktop.html">Desktop</a></li><li><a href="module-Fenestra_Components_Taskbar-Taskbar.html">Taskbar</a></li><li><a href="module-Fenestra_Components_Window.BoundWindow.html">BoundWindow</a></li><li><a href="module-Fenestra_Components_Window-Window.html">Window</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Fenestra_Actions.html">Fenestra/Actions</a></li><li><a href="module-Fenestra_Actions_Types.html">Fenestra/Actions/Types</a></li><li><a href="module-Fenestra_Components_App.html">Fenestra/Components/App</a></li><li><a href="module-Fenestra_Components_Desktop.html">Fenestra/Components/Desktop</a></li><li><a href="module-Fenestra_Components_Taskbar.html">Fenestra/Components/Taskbar</a></li><li><a href="module-Fenestra_Components_Window.html">Fenestra/Components/Window</a></li><li><a href="module-Fenestra_Messages.html">Fenestra/Messages</a></li><li><a href="module-Fenestra_Reducers.html">Fenestra/Reducers</a></li></ul><h3>Classes</h3><ul><li><a href="module-Fenestra_Components_App-App.html">App</a></li><li><a href="module-Fenestra_Components_Desktop-Desktop.html">Desktop</a></li><li><a href="module-Fenestra_Components_Taskbar-Taskbar.html">Taskbar</a></li><li><a href="module-Fenestra_Components_Window.BoundWindow.html">BoundWindow</a></li><li><a href="module-Fenestra_Components_Window-Window.html">Window</a></li></ul><h3>Global</h3><ul><li><a href="global.html#appPropTypes">appPropTypes</a></li><li><a href="global.html#iconPropTypes">iconPropTypes</a></li><li><a href="global.html#taskbarPropTypes">taskbarPropTypes</a></li><li><a href="global.html#windowPropTypes">windowPropTypes</a></li><li><a href="global.html#windowStatePropTypes">windowStatePropTypes</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Aug 16 2019 04:14:50 GMT-0300 (GMT-03:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Sat Aug 24 2019 18:03:14 GMT-0300 (GMT-03:00)
 </footer>
 
 <script> prettyPrint(); </script>

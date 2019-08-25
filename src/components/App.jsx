@@ -12,8 +12,6 @@ import Desktop from './Desktop';
 import { setData } from '../actions';
 import { appPropTypes } from '../prop-types';
 
-import '../styles/app.css';
-
 /**
  * Componente da Aplicação Fenestra.
  * @extends {React.Component}

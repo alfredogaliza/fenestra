@@ -65,7 +65,7 @@ class Window extends React.Component {
      * Propriedades padrão do Componente
      */
     static defaultProps = {
-        title: "Nova Janela",
+        title: undefined,
         children: null,
         isLoading: false,
         open: () => undefined,
@@ -87,7 +87,7 @@ class Window extends React.Component {
      */
     close = (event) => {
         event.stopPropagation();
-        if (global.confirm("Deseja fechar esta janela: " + this.props.title + "?")) {
+        if (global.confirm(this.props.msgs.closeDialog + this.props.title + "?")) {
             this.props.close();
         }
     }
@@ -137,23 +137,23 @@ class Window extends React.Component {
                 onTouchStart={() => this.props.activate()}
             >
                 <div
-                    className="fenestra-window-title"
+                    className="fenestra-window-header"
                     style={{ borderRadius: this.props.maximized ? 0 : undefined }}
                     onDoubleClick={(e) => this.toggleMaximize(e)}
                     onMouseDown={e => this.props.startMove(e.pageX, e.pageY)}
                     onTouchStart={event => this.props.startMove(event.touches[0].pageX, event.touches[0].pageY)}
                 >
 
-                    <span>{this.props.title}</span>
+                    <span className="fenestra-window-header-title">{this.props.title}</span>
 
-                    <div className="fenestra-window-title-buttons">
-                        <button type="button" className={"btn btn-outline-secondary text-white btn-sm " + (this.props.minimizeable ? "" : "d-none")} onClick={(e) => this.minimize(e)}>
+                    <div className="fenestra-window-header-buttons">
+                        <button title={this.props.msgs.minimizeWindow} type="button" className={this.props.minimizeable ? "" : "d-none"} onClick={(e) => this.minimize(e)}>
                             <i className="fa fa-window-minimize"></i>
                         </button>&nbsp;
-                        <button type="button" className={"btn btn-outline-secondary text-white btn-sm " + (this.props.resizeable ? "" : "d-none")} onClick={(e) => this.toggleMaximize(e)}>
+                        <button title={this.props.msgs.maximizeWindow} type="button" className={this.props.resizeable ? "" : "d-none"} onClick={(e) => this.toggleMaximize(e)}>
                             <i className={"fa fa-window-" + (this.props.maximized ? "restore" : "maximize")}></i>
                         </button>&nbsp;
-                        <button type="button" className={"btn btn-outline-secondary text-white btn-sm " + (this.props.closeable ? "" : "d-none")} onClick={(e) => this.close(e)}>
+                        <button title={this.props.msgs.closeWindow} type="button" className={this.props.closeable ? "" : "d-none"} onClick={(e) => this.close(e)}>
                             <i className="fa fa-remove"></i>
                         </button>
                     </div>
@@ -167,7 +167,7 @@ class Window extends React.Component {
 
                 <div className="fenestra-window-footer">
                     {this.props.footer}
-                    <button type="button"
+                    <button title={this.props.msgs.resizeWindow} type="button"
                         className="fenestra-window-resize"
                         onMouseDown={({ pageX, pageY }) => this.props.startResize(pageX, pageY)}
                         onTouchStart={e => this.props.startResize(e.touches[0].pageX, e.touches[0].pageY)}>

@@ -1,0 +1,132 @@
+$background-color: #A0C0FF;
+$active-color: blue;
+$inactive-color: lightblue;
+$font-color: white;
+$backdrop-color:  rgba(0, 0, 0, 0.25);
+$window-footer-background-color: #E0E0E0;
+$window-border-radius: 5px;
+$taskbar-background-color: lightblue;
+$icon-background-color: lightblue;
+
+.fenestra-desktop {
+  background-color: $background-color; 
+}
+
+.fenestra-desktop-icon {
+  width: 150px;
+  min-height: 80px;
+  margin: 5px 0 0 5px;
+  border-radius: 4px;
+  border: none;
+  background-color: $icon-background-color;
+  transition: background-color 0.5s;
+}
+
+.fenestra-desktop-icon:hover {
+  background-color: $active-color;
+}
+
+.fenestra-taskbar {
+  background-color: $taskbar-background-color;
+}
+.fenestra-taskbar-buttons {
+  background-color: $taskbar-background-color;
+}
+
+.fenestra-taskbar-button { 
+
+  appearance: none;
+  border-radius: 6px;
+
+  border: solid $inactive-color 1px;
+  color: $font-color;
+  background-color: $inactive-color;
+  transition: background-color 0.5s;
+}
+
+.fenestra-taskbar-button-desktop {
+
+  margin: 5px;
+  margin-left: auto !important;
+  width: 40px;
+  height: 40px;
+
+  white-space: nowrap; 
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.fenestra-taskbar-button.active,
+.fenestra-taskbar-button:hover,
+.fenestra-taskbar-button-desktop:hover,
+.fenestra-taskbar-button-windows:hover {
+  background-color: $active-color;
+}
+
+.fenestra-window {
+  border-radius: $window-border-radius;
+  box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s cubic-bezier(0.5, 1.5, 0.5, 1);
+}
+
+.fenestra-desktop-moving
+.fenestra-window {
+  transition: none;
+}
+
+.fenestra-window-header {
+
+  font-weight: bold;
+
+  border-top-left-radius: $window-border-radius;
+  border-top-right-radius: $window-border-radius;
+
+  background-color: $inactive-color;
+  color: $font-color;  
+
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+  transition: background-color 0.5s;
+
+
+}
+
+.fenestra-window-active
+.fenestra-window-header {
+  background-color: $active-color;
+}
+
+
+.fenestra-window-body {
+  margin: 0px;
+  border: none;
+}
+
+.fenestra-window-footer {
+  background-color: $window-footer-background-color;
+
+  border-bottom-left-radius: $window-border-radius;
+  border-bottom-right-radius: $window-border-radius;
+
+}
+
+.fenestra-loading {
+  color: $font-color;
+  font-size: 60pt; 
+}
+
+@media (max-width: 576px) {
+
+  .fenestra-taskbar-buttons {      
+    background-color: $taskbar-background-color;
+    border: solid white 1px;    
+  }
+
+  .fenestra-taskbar-buttons .fenestra-taskbar-button { 
+    display: block;
+    width: 100%;
+    margin: 5px 0px;
+  }
+
+}

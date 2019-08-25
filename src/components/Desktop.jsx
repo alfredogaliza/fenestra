@@ -99,7 +99,7 @@ class Desktop extends React.Component {
 
         const icons = this.props.icons.map((icon, key) => {
             return (
-                <button key={key} type="button" className="btn btn-secondary btn-lg fenestra-desktop-icon" onClick={() => this.props.openIcon(icon)}>
+                <button title={icon.title} key={key} type="button" className="fenestra-desktop-icon" onClick={() => icon.window? this.props.open(icon.window.props,icon.window.template,icon.window.templateProps): null}>
                     <i className={icon.icon}></i><br />
                     <span className="small">{icon.title}</span>
                 </button>

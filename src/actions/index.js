@@ -41,7 +41,7 @@ export const DEFAULT_PROPS = {
         height: DEFAULT_HEIGHT
     },
 
-    title: "New Window",
+    title: undefined,
     footer: "",
 
     active: true,
@@ -234,7 +234,6 @@ export const boundDesktopProps = state => ({
 /**
  * @typedef {Object} BoundDesktopActions
  * @property {function} open Abre uma janela
- * @property {function} openIcon Abre a janela correspondente ao ícone
  * @property {function} activate Ativa uma janela
  * @property {function} minimize Minimiza uma janela
  * @property {function} maximize  Maximiza uma janela
@@ -248,6 +247,7 @@ export const boundDesktopProps = state => ({
  * @property {function} setData Reinicia a sessão com novos ícones e janelas
  * 
  */
+
 /**
  * Mapeia as propriedades do Desktop para o despachante da aplicação.
  * @method
@@ -256,7 +256,6 @@ export const boundDesktopProps = state => ({
  */
 export const boundDesktopActions = dispatch => ({
     open: (props, template, templateProps) => dispatch(open(props, template, templateProps)),
-    openIcon: ({ window: { props, template, templateProps } }) => dispatch(open(props, template, templateProps)),
     activate: (key, active = true) => dispatch(activate(key, active)),
     minimize: (key, min = true) => dispatch(minimize(key, min)),
     maximize: (key, max = true) => dispatch(maximize(key, max)),
@@ -366,7 +365,8 @@ export const boundWindowActions = (key) => dispatch => ({
  */
 /**
  * @typedef {Object} WindowProps Ações da janela.
- * @property {booleab} isLoading Determina se a janela está com backdrop de carregamento
+ * @property {boolean} isLoading Determina se a janela está com backdrop de carregamento
+ * @property {module:Fenestra/Messages~Messages} msgs Mensagens do sistema
  */
 /**
  * Mapeia as propriedades da Janela para o Estado da aplicação.
@@ -375,7 +375,8 @@ export const boundWindowActions = (key) => dispatch => ({
  * @returns {module:Fenestra/Actions~BoundWindowProps} Mapeamento das Propriedades
  */
 export const boundWindowProps = (key) => state => ({
-    isLoading: state.fenestra.windows.find(window => window.key === key).isLoading
+    isLoading: state.fenestra.windows.find(window => window.key === key).isLoading,
+    msgs: state.fenestra.msgs
 });
 
 /**
@@ -396,6 +397,7 @@ export const boundIconActions = dispatch => ({
 /**
  * @typedef {Object} BoundTaskbarProps 
  * @property {module:Fenestra/Components/Window~WindowState[]} windows Janelas do Desktop
+ * @property {module:Fenestra/Messages~Messages} msgs Janelas do Desktop
  */
 
 /**
@@ -405,7 +407,8 @@ export const boundIconActions = dispatch => ({
  * @returns {module:Fenestra/Actions~BoundTaskbarProps} Mapeamento Estado/Propriedade
  */
 export const boundTaskbarProps = state => ({
-    windows: state.fenestra.windows
+    windows: state.fenestra.windows,
+    msgs: state.fenestra.msgs
 });
 
 

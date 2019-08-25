@@ -7,7 +7,7 @@ module.exports = {
 
     output: {
       filename: "fenestra.bundle.js",
-      path: path.resolve(__dirname, 'build'),
+      path: path.resolve(__dirname, 'build/'),
       library: 'Fenestra',
       libraryTarget: 'umd'
     },

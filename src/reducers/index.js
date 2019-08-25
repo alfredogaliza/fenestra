@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 import * as types from '../actions/types';
 import { BoundWindow } from '../components/Window';
 import { boundTemplateActions } from '../actions';
+import messages from '../messages';
+
 import {
     TRANSFORM_MOVE,
     TRANSFORM_RESIZE
@@ -52,6 +54,7 @@ import {
  * @property {number} startHeight Altura inicial da janela a ser transformada
  * @property {module:Fenestra/Reducers~WinKey} transformKey Identificador da janela a ser transformada
  * @property {module:Fenestra/Reducers~TransformType} transformType Tipo de transformação a ser aplicada na janela
+ * @property {module:Fenestra/Messages~Messages} msgs Mensagens do sistema
  */
  
 /**
@@ -70,7 +73,8 @@ const initialState = {
     startWidth: 0,
     startHeight: 0,
     transformKey: null,
-    transformType: null
+    transformType: null,
+    msgs: messages
 }
 
 /**
@@ -132,7 +136,11 @@ const fenestraReducer = (state = initialState, action) => {
         case types.WINDOW_OPEN:
 
             const key = newState.winKey++;
-            const window = newWindow(key, action.props, action.template, action.templateProps);
+            const props = {
+                ...action.props,
+                title: (action.props.title || newState.msgs.defaultTitle)
+            }
+            const window = newWindow(key, props, action.template, action.templateProps);
 
             newState.windows.push(window);
 
@@ -238,6 +246,7 @@ const fenestraReducer = (state = initialState, action) => {
 
         case types.SET_DATA:
             var winKey = 0;
+            const msgs = action.data.msgs || messages;
             const icons = (action.data.icons || []);
             const windows = (action.data.windows || []).map(window => {
                 return newWindow(winKey++, window.props, window.template, window.templateProps);
@@ -247,8 +256,10 @@ const fenestraReducer = (state = initialState, action) => {
                 ...initialState,
                 winKey,
                 icons,
-                windows
+                windows,
+                msgs
             };
+
             break;
 
         default:

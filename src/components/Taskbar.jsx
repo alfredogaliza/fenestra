@@ -54,20 +54,20 @@ class Taskbar extends React.Component {
     render() {
         const buttons = this.props.windows.map(window => {
             return (
-                <button key={window.key} className={"btn btn-outline-secondary fenestra-taskbar-button " + (window.props.active ? "active" : "")} onMouseDown={() => this.toggle(window)}>
+                <button title={window.props.title} key={window.key} className={"fenestra-taskbar-button " + (window.props.active ? "active" : "")} onMouseDown={() => this.toggle(window)}>
                     {window.props.title}
                 </button>
             );
         });
         return (
             <nav className="fenestra-taskbar" >
-                <button type="button" className="btn btn-outline-secondary fenestra-taskbar-button fenestra-taskbar-button-windows">
+                <button title={this.props.msgs.showWindows} type="button" className="fenestra-taskbar-button fenestra-taskbar-button-windows">
                     <i className="fa fa-window-restore"></i>
                 </button>
                 <div className="fenestra-taskbar-buttons">
                     {buttons}
                 </div>
-                <button type="button" className="btn btn-outline-secondary fenestra-taskbar-button fenestra-taskbar-button-desktop" onClick={() => this.minimizeAll()}>
+                <button title={this.props.msgs.showDesktop} type="button" className="fenestra-taskbar-button fenestra-taskbar-button-desktop" onClick={() => this.minimizeAll()}>
                     <i className="fa fa-desktop"></i>
                 </button>
             </nav>

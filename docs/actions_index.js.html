@@ -44,6 +44,11 @@
 
 import * as actionType from './types';
 
+import {
+    TRANSFORM_MOVE,
+    TRANSFORM_RESIZE
+} from './types';
+
 /** Largura Padrão da janela */
 export const DEFAULT_WIDTH = 300;
 
@@ -257,7 +262,6 @@ export const boundDesktopProps = state => ({
 /**
  * @typedef {Object} BoundDesktopActions
  * @property {function} open Abre uma janela
- * @property {function} openIcon Abre a janela correspondente ao ícone
  * @property {function} activate Ativa uma janela
  * @property {function} minimize Minimiza uma janela
  * @property {function} maximize  Maximiza uma janela
@@ -271,6 +275,7 @@ export const boundDesktopProps = state => ({
  * @property {function} setData Reinicia a sessão com novos ícones e janelas
  * 
  */
+
 /**
  * Mapeia as propriedades do Desktop para o despachante da aplicação.
  * @method
@@ -279,7 +284,6 @@ export const boundDesktopProps = state => ({
  */
 export const boundDesktopActions = dispatch => ({
     open: (props, template, templateProps) => dispatch(open(props, template, templateProps)),
-    openIcon: ({ window: { props, template, templateProps } }) => dispatch(open(props, template, templateProps)),
     activate: (key, active = true) => dispatch(activate(key, active)),
     minimize: (key, min = true) => dispatch(minimize(key, min)),
     maximize: (key, max = true) => dispatch(maximize(key, max)),
@@ -389,7 +393,8 @@ export const boundWindowActions = (key) => dispatch => ({
  */
 /**
  * @typedef {Object} WindowProps Ações da janela.
- * @property {booleab} isLoading Determina se a janela está com backdrop de carregamento
+ * @property {boolean} isLoading Determina se a janela está com backdrop de carregamento
+ * @property {module:Fenestra/Messages~Messages} msgs Mensagens do sistema
  */
 /**
  * Mapeia as propriedades da Janela para o Estado da aplicação.
@@ -398,7 +403,8 @@ export const boundWindowActions = (key) => dispatch => ({
  * @returns {module:Fenestra/Actions~BoundWindowProps} Mapeamento das Propriedades
  */
 export const boundWindowProps = (key) => state => ({
-    isLoading: state.fenestra.windows.find(window => window.key === key).isLoading
+    isLoading: state.fenestra.windows.find(window => window.key === key).isLoading,
+    msgs: state.fenestra.msgs
 });
 
 /**
@@ -419,6 +425,7 @@ export const boundIconActions = dispatch => ({
 /**
  * @typedef {Object} BoundTaskbarProps 
  * @property {module:Fenestra/Components/Window~WindowState[]} windows Janelas do Desktop
+ * @property {module:Fenestra/Messages~Messages} msgs Janelas do Desktop
  */
 
 /**
@@ -428,7 +435,8 @@ export const boundIconActions = dispatch => ({
  * @returns {module:Fenestra/Actions~BoundTaskbarProps} Mapeamento Estado/Propriedade
  */
 export const boundTaskbarProps = state => ({
-    windows: state.fenestra.windows
+    windows: state.fenestra.windows,
+    msgs: state.fenestra.msgs
 });
 
 
@@ -454,13 +462,13 @@ export default {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Fenestra_Actions.html">Fenestra/Actions</a></li><li><a href="module-Fenestra_Actions_Types.html">Fenestra/Actions/Types</a></li><li><a href="module-Fenestra_Components_App.html">Fenestra/Components/App</a></li><li><a href="module-Fenestra_Components_Desktop.html">Fenestra/Components/Desktop</a></li><li><a href="module-Fenestra_Components_Taskbar.html">Fenestra/Components/Taskbar</a></li><li><a href="module-Fenestra_Components_Window.html">Fenestra/Components/Window</a></li><li><a href="module-Fenestra_Reducers.html">Fenestra/Reducers</a></li></ul><h3>Classes</h3><ul><li><a href="module-Fenestra_Components_App-App.html">App</a></li><li><a href="module-Fenestra_Components_Desktop-Desktop.html">Desktop</a></li><li><a href="module-Fenestra_Components_Taskbar-Taskbar.html">Taskbar</a></li><li><a href="module-Fenestra_Components_Window.BoundWindow.html">BoundWindow</a></li><li><a href="module-Fenestra_Components_Window-Window.html">Window</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Fenestra_Actions.html">Fenestra/Actions</a></li><li><a href="module-Fenestra_Actions_Types.html">Fenestra/Actions/Types</a></li><li><a href="module-Fenestra_Components_App.html">Fenestra/Components/App</a></li><li><a href="module-Fenestra_Components_Desktop.html">Fenestra/Components/Desktop</a></li><li><a href="module-Fenestra_Components_Taskbar.html">Fenestra/Components/Taskbar</a></li><li><a href="module-Fenestra_Components_Window.html">Fenestra/Components/Window</a></li><li><a href="module-Fenestra_Messages.html">Fenestra/Messages</a></li><li><a href="module-Fenestra_Reducers.html">Fenestra/Reducers</a></li></ul><h3>Classes</h3><ul><li><a href="module-Fenestra_Components_App-App.html">App</a></li><li><a href="module-Fenestra_Components_Desktop-Desktop.html">Desktop</a></li><li><a href="module-Fenestra_Components_Taskbar-Taskbar.html">Taskbar</a></li><li><a href="module-Fenestra_Components_Window.BoundWindow.html">BoundWindow</a></li><li><a href="module-Fenestra_Components_Window-Window.html">Window</a></li></ul><h3>Global</h3><ul><li><a href="global.html#appPropTypes">appPropTypes</a></li><li><a href="global.html#iconPropTypes">iconPropTypes</a></li><li><a href="global.html#taskbarPropTypes">taskbarPropTypes</a></li><li><a href="global.html#windowPropTypes">windowPropTypes</a></li><li><a href="global.html#windowStatePropTypes">windowStatePropTypes</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Aug 16 2019 04:14:50 GMT-0300 (GMT-03:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Sat Aug 24 2019 18:03:14 GMT-0300 (GMT-03:00)
 </footer>
 
 <script> prettyPrint(); </script>
