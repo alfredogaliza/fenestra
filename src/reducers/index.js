@@ -36,9 +36,20 @@ import {
  * @property {string} type Tipo da ação
  */
 
- /**
-  * @typedef {Object} IconState Estado de um ícone armazenado em um Store Redux.
-  */
+/**
+ * @typedef {Object} IconState Estado de um ícone armazenado em um Store Redux.
+ */
+
+/**
+ * @typedef {Object} Options Opções da aplicação
+ * @property {boolean} showTaskbar Barra de Tarefas visível
+ * @property {string} className Nome da classe CSS adicional do desktop, utilize para customizar a aparência
+ * @property {integer} taskbarHeight Altura da barra de tarefas
+ * @property {boolean} autohideTaskbar Esconde a barra de tarefas após um certo período
+ * @property {integer} autohideTimeout Define o tempo (em ms) de espera para esconder a barra de tarefas
+ * @property {boolean} confirmOnClose Pede a confirmação de fechamento da janela
+ * @property {module:Fenestra/Messages~Messages} msgs Mensagens do sistema
+ */
 
 /**
  * @typedef {Object} State Estado da aplicação Fenestra.
@@ -54,7 +65,7 @@ import {
  * @property {number} startHeight Altura inicial da janela a ser transformada
  * @property {module:Fenestra/Reducers~WinKey} transformKey Identificador da janela a ser transformada
  * @property {module:Fenestra/Reducers~TransformType} transformType Tipo de transformação a ser aplicada na janela
- * @property {module:Fenestra/Messages~Messages} msgs Mensagens do sistema
+ * @property {module:Fenestra/Reducers~Options} options Opções da aplicação
  */
  
 /**
@@ -73,8 +84,16 @@ const initialState = {
     startWidth: 0,
     startHeight: 0,
     transformKey: null,
-    transformType: null,
-    msgs: messages
+    transformType: null,    
+    options: {
+        className: "",
+        showTaskbar: true,
+        taskbarHeight: 50,
+        autohideTaskbar: false,
+        autohideTimeout: 1000,
+        confirmOnClose: false,
+        msgs: messages
+    }
 }
 
 /**
@@ -138,7 +157,7 @@ const fenestraReducer = (state = initialState, action) => {
             const key = newState.winKey++;
             const props = {
                 ...action.props,
-                title: (action.props.title || newState.msgs.defaultTitle)
+                title: (action.props.title || newState.options.msgs.defaultTitle)
             }
             const window = newWindow(key, props, action.template, action.templateProps);
 
@@ -200,8 +219,7 @@ const fenestraReducer = (state = initialState, action) => {
             newState.startHeight = target.props.style.height;
             break;
 
-        case types.WINDOW_TRANSFORM:            
-            if (!global.window) break;
+        case types.WINDOW_TRANSFORM:           
             newState.windows = newState.windows.map(window => {
                 var props = { ...window.props, style: { ...window.props.style } };
                 if (window.key === newState.transformKey) {
@@ -243,13 +261,45 @@ const fenestraReducer = (state = initialState, action) => {
             }
 
             break;
-
+            
+        case types.SHOW_TASKBAR:
+            return {
+                ...newState,
+                options: {
+                    ...newState.options,
+                    showTaskbar: true
+                }
+            }
+        case types.HIDE_TASKBAR:
+            return {
+                ...newState,
+                options: {
+                    ...newState.options,
+                    showTaskbar: false
+                }
+            } 
+        case types.SET_OPTIONS:
+            return {
+                ...newState,
+                options: {
+                    ...newState.options,
+                    ...action.options
+                }
+            }          
         case types.SET_DATA:
             var winKey = 0;
-            const msgs = action.data.msgs || messages;
             const icons = (action.data.icons || []);
+            const options =  (action.data.options || {msgs: {}});
+            const msgs = {
+                ...initialState.options.msgs,
+                ...options.msgs
+            };
             const windows = (action.data.windows || []).map(window => {
-                return newWindow(winKey++, window.props, window.template, window.templateProps);
+                const props = {
+                    title: msgs.defaultTitle,
+                    ...window.props
+                };
+                return newWindow(winKey++, props, window.template, window.templateProps);
             });
 
             newState = {
@@ -257,7 +307,14 @@ const fenestraReducer = (state = initialState, action) => {
                 winKey,
                 icons,
                 windows,
-                msgs
+                options: {
+                    ...initialState.options,
+                    ...options,
+                    msgs: {
+                        ...initialState.options.msgs,
+                        ...options.msgs
+                    }
+                }
             };
 
             break;

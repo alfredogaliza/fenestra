@@ -14,7 +14,14 @@ $window-body-background: white;
   top: 0; 
   left: 0; 
   bottom: 0;
-  right: 0;  
+  right: 0;
+  overflow-y: hidden;
+}
+
+.fenestra-desktop *,
+.fenestra-desktop *::after,
+.fenestra-desktop *::before{
+  box-sizing: border-box;
 }
 
 .fenestra-desktop-windows {
@@ -23,27 +30,30 @@ $window-body-background: white;
   top: 0;
   left: 0;
   right: 0;
-  bottom: $taskbar-height; 
   overflow: auto;
 }
 
-.fenestra-desktop-maximized 
+.fenestra-desktop-maximized >
 .fenestra-desktop-windows {
   overflow: hidden;
 }
 
-.fenestra-desktop-moving
+.fenestra-desktop-moving >
 .fenestra-desktop-windows {
   overflow: hidden;
 }
 
+.fenestra-desktop-moving >
+.fenestra-desktop-windows > 
+.fenestra-window {
+  transition: none;
+}
 
 .fenestra-desktop-icons {
   background-color: transparent !important;  
   position: absolute;
   top: 0;
   left: 0;
-  bottom: $taskbar-height;
 
   display: flex;
 	flex-direction: column;
@@ -66,8 +76,6 @@ $window-body-background: white;
 .fenestra-taskbar {
   position: absolute;
   bottom: 0px;
-  height: $taskbar-height;
-
   width: 100%;
 
   margin: 0px;
@@ -75,10 +83,15 @@ $window-body-background: white;
   background-color: $background-color;
   
   display: flex;
-  align-items: center;
   align-items: stretch;
 
   z-index: 1000;
+}
+
+.fenestra-taskbar,
+.fenestra-desktop-icons,
+.fenestra-desktop-windows {
+  transition: bottom 0.5s;
 }
 
 .fenestra-taskbar > * {
@@ -117,12 +130,11 @@ $window-body-background: white;
 .fenestra-taskbar-button-desktop {
   margin: $taskbar-padding;
   margin-left: auto;
-  width: ($taskbar-height - 2 * $taskbar-padding);
 }
 
 .fenestra-taskbar-button-windows {
   margin: $taskbar-padding;
-  width: ($taskbar-height - 2 * $taskbar-padding);
+  width: 40px;
   display: none !important;
 }
 
@@ -169,7 +181,7 @@ $window-body-background: white;
   user-select: none;
 }
 
-.fenestra-window-active
+.fenestra-window-active >
 .fenestra-window-header {
   background-color: $active-color;
 }
@@ -203,13 +215,18 @@ $window-body-background: white;
 
 .fenestra-window-footer {
   display: flex;
-  height: 1em;
+  height: auto;
   padding: $taskbar-padding;
   background-color: $background-color;
-  color: $foreground-color;
+  color: $active-color;
 }
 
-.fenestra-window-maximized
+.fenestra-window-nofooter >
+.fenestra-window-footer {
+  display: none !important;
+}
+
+.fenestra-window-maximized >
 .fenestra-window-footer {
   border: none;
   border-bottom: solid $foreground-color 1px;
@@ -218,19 +235,29 @@ $window-body-background: white;
 
 .fenestra-window-resize {
   cursor: nwse-resize;
-  margin-left: auto;
-  margin-right: 2px;
+  position: absolute;
+  bottom: 2px;
+  right: 1px;
+  font-size: 1em;
+  line-height: 1em;
+  height: 1em;  
   padding: 0 !important;
   text-decoration: none;
   appearance: none;
   border: none;
-  color: $foreground-color;
+  color: transparent !important;
   background-color: transparent !important;  
+  z-index: 10000;
 }
 
-.fenestra-window-maximized
+.fenestra-window-resize:hover,
+.fenestra-window-resize:active {
+  color: black !important;
+}
+
+.fenestra-window-maximized > 
 .fenestra-window-resize {
-  display: none;
+  display: none !important;
 }
 
 .fenestra-loading {
@@ -249,14 +276,6 @@ $window-body-background: white;
 
   body {
     overflow-y: hidden;
-  }
-
-  .fenestra-desktop {
-    position: fixed;  
-    top: 0; 
-    left: 0; 
-    bottom: 0;
-    right: 0;  
   }
 
   .fenestra-taskbar-button-windows {    
@@ -284,7 +303,8 @@ $window-body-background: white;
 
   }
 
-  .fenestra-taskbar-buttons .fenestra-taskbar-button { 
+  .fenestra-taskbar-buttons >
+  .fenestra-taskbar-button { 
     display: block;
     width: 100%;
     height: 3em;

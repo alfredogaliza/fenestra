@@ -52,3 +52,12 @@ export const SET_DATA = "SET_DATA";
 
 /** @constant {module:Fenestra/Actions/Types~ActionType} SET_FOOTER -  Alterar rodapé da Janela */
 export const SET_FOOTER = "SET_FOOTER";
+
+/** @constant {module:Fenestra/Actions/Types~ActionType} SET_OPTIONS -  Alterar opções da aplicação */
+export const SET_OPTIONS = "SET_OPTIONS";
+
+/** @constant {module:Fenestra/Actions/Types~ActionType} SHOW_TASKBAR -  Mostrar a barra de tarefas */
+export const SHOW_TASKBAR = "SHOW_TASKBAR";
+
+/** @constant {module:Fenestra/Actions/Types~ActionType} HIDE_TASKBAR -  Esconder a barra de tarefas */
+export const HIDE_TASKBAR = "HIDE_TASKBAR";

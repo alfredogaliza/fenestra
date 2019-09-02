@@ -51,10 +51,23 @@ export const DEFAULT_PROPS = {
     resizeable: true,
     moveable: true,
     minimizeable: true,
-    closeable: true
+    closeable: true,
 
-
+    noFooter: false
 };
+
+/**
+ * Altera opções da aplicação
+ * @method
+ * @param {module:Fenestra/Reducers~Options} options - Opções a serem alteradas
+ * @returns {module:Fenestra/Actions~Action} Ação a ser despachada
+ */
+export const setOptions = (options) => {
+    return {
+        type: actionType.SET_OPTIONS,
+        options
+    }
+}
 
 /**
  * Abre uma nova janela.
@@ -191,9 +204,10 @@ export const setLoading = (key, isLoading) => ({
  * @param {Object} data - Dados da nova sessão a ser iniciada
  * @param {module:Fenestra/Components/Window~WindowData[]} data.windows - Janela a serem abertas no início da sessão
  * @param {module:Fenestra/Components/Desktop~IconData[]} data.icons - Ícones a serem mostrados no Desktop
+ * @param {module:Fenestra/Reducers~Options} data.options - Opções da aplicação
  * @returns {module:Fenestra/Actions~Action} Ação a ser despachada
  */
-export const setData = (data = { icons: [], windows: [] }) => ({
+export const setData = (data = { icons: [], windows: [], options: {} }) => ({
     type: actionType.SET_DATA,
     data
 });
@@ -211,9 +225,28 @@ export const setFooter = (key, footer) => ({
 });
 
 /**
+ * Mostra a barra de tarefas
+ * @method
+ * @returns {module:Fenestra/Actions~Action} Ação a ser despachada
+ */
+export const showTaskbar = () => ({
+    type: actionType.SHOW_TASKBAR
+});
+
+/**
+ * Esconde a barra de tarefas
+ * @method
+ * @returns {module:Fenestra/Actions~Action} Ação a ser despachada
+ */
+export const hideTaskbar = () => ({
+    type: actionType.HIDE_TASKBAR
+});
+
+/**
  * @typedef {Object} BoundDesktopProps
  * @property {module:Fenestra/Components/Desktop~IconData[]} icons Ícones do Desktop
  * @property {module:Fenestra/Components/Window~WindowState[]} windows Janelas do Desktop
+ * @property {module:Fenestra/Reducers~Options} options Opções da aplicação
  * @property {boolean} isMaximized Determina se há alguma janela maximizada e ativa
  * @property {boolean} isMoving Determina se há alguma janela em movimento
  */
@@ -227,6 +260,7 @@ export const setFooter = (key, footer) => ({
 export const boundDesktopProps = state => ({
     icons: state.fenestra.icons,
     windows: state.fenestra.windows,
+    options: state.fenestra.options,
     isMaximized: state.fenestra.windows.some(window => window.props.active && window.props.maximized),
     isMoving: state.fenestra.transformType !== null && state.fenestra.transformKey !== null
 });
@@ -245,7 +279,8 @@ export const boundDesktopProps = state => ({
  * @property {function} setLoading Altera o backdrop de uma janela
  * @property {function} setFooter  Altera o rodapé de uma janela
  * @property {function} setData Reinicia a sessão com novos ícones e janelas
- * 
+ * @property {function} showTaskbar Mostra a barra de tarefas
+ * @property {function} hideTaskbar Esconde a barra de tarefas
  */
 
 /**
@@ -266,12 +301,15 @@ export const boundDesktopActions = dispatch => ({
     close: (key) => dispatch(close(key)),
     setLoading: (key, isLoading = true) => dispatch(setLoading(key, isLoading)),
     setFooter: (key, footer = "") => dispatch(setFooter(key, footer)),
-    setData: data => dispatch(setData(data))
+    setData: data => dispatch(setData(data)),
+    showTaskbar: () => dispatch(showTaskbar()),
+    hideTaskbar: () => dispatch(hideTaskbar()),
 });
 
 /**
  * @typedef {Object} BoundTaskbarActions
  * @property {function} activate Ativa uma janela
+ * @property {function} hideTaskbar Esconde a barra de Tarefas
 */
 
 /**
@@ -281,7 +319,8 @@ export const boundDesktopActions = dispatch => ({
  * @returns {module:Fenestra/Actions~BoundTaskbarActions} Mapeamento das Propriedades
  */
 export const boundTaskbarActions = dispatch => ({
-    activate: (key, active = true) => dispatch(activate(key, active))
+    activate: (key, active = true) => dispatch(activate(key, active)),
+    hideTaskbar: () => dispatch(hideTaskbar())
 });
 
 /**
@@ -289,6 +328,7 @@ export const boundTaskbarActions = dispatch => ({
  * @param {module:Fenestra/Actions~Dispatcher} dispatch Despachante da Ação
  * @returns {module:Fenestra/Actions~TemplateActions}
  */
+
 /**
  * @typedef {Object} TemplateActions Ações do template de conteúdo da janela.
  * @property {function} open Abre uma janela
@@ -324,6 +364,7 @@ export const boundTemplateActions = (key) => dispatch => ({
  * @param {module:Fenestra/Actions~Dispatcher} dispatch Despachante da Ação
  * @returns {module:Fenestra/Actions~WindowActions}
  */
+
 /**
  * @typedef {Object} WindowActions Ações da janela.
  * @property {function} open Abre uma janela
@@ -359,15 +400,17 @@ export const boundWindowActions = (key) => dispatch => ({
 });
 
 /**
+ * @typedef {Object} WindowProps Ações da janela.
+ * @property {boolean} isLoading Determina se a janela está com backdrop de carregamento
+ * @property {module:Fenestra/Reducers~Options} options Opções da aplicação
+ */
+
+/**
  * @typedef {function} BoundWindowProps Propriedades da Janela conectadas ao redux
  * @param {module:Fenestra/Actions~Dispatcher} dispatch Despachante da Ação
  * @returns {module:Fenestra/Actions~WindowProps}
  */
-/**
- * @typedef {Object} WindowProps Ações da janela.
- * @property {boolean} isLoading Determina se a janela está com backdrop de carregamento
- * @property {module:Fenestra/Messages~Messages} msgs Mensagens do sistema
- */
+
 /**
  * Mapeia as propriedades da Janela para o Estado da aplicação.
  * @method
@@ -376,7 +419,7 @@ export const boundWindowActions = (key) => dispatch => ({
  */
 export const boundWindowProps = (key) => state => ({
     isLoading: state.fenestra.windows.find(window => window.key === key).isLoading,
-    msgs: state.fenestra.msgs
+    options: state.fenestra.options,
 });
 
 /**
@@ -396,6 +439,7 @@ export const boundIconActions = dispatch => ({
 
 /**
  * @typedef {Object} BoundTaskbarProps 
+ * @property {module:Fenestra/Reducers~Options} options Opções da aplicação
  * @property {module:Fenestra/Components/Window~WindowState[]} windows Janelas do Desktop
  * @property {module:Fenestra/Messages~Messages} msgs Janelas do Desktop
  */
@@ -407,21 +451,7 @@ export const boundIconActions = dispatch => ({
  * @returns {module:Fenestra/Actions~BoundTaskbarProps} Mapeamento Estado/Propriedade
  */
 export const boundTaskbarProps = state => ({
+    options: state.fenestra.options,
     windows: state.fenestra.windows,
     msgs: state.fenestra.msgs
 });
-
-
-export default {
-    open,
-    close,
-    activate,
-    minimize,
-    maximize,
-    startTransform,
-    transform,
-    endTransform,
-    setLoading,
-    setFooter,
-    setData
-};

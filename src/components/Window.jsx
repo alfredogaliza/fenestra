@@ -19,22 +19,23 @@ import { boundWindowActions, boundWindowProps } from '../actions';
  * @property {boolean} moveable - Indica se a janela é movimentável
  * @property {boolean} minimizeable - Indica se a janela é minimizável
  * @property {boolean} closeable - Indica se a janela é fechável
+ * @property {boolean} noFooter - Indica se o rodapé deverá ser ocultado
  */
 
- /**
- * @typedef {Object} WindowData - Dados de uma janela a ser aberta
- * @property {module:Fenestra/Components/Window~WindowProps} props - Propriedades da Janela
- * @property {*} template - Componente renderizável de conteúdo da janela
- * @property {Object} templateProps - Propriedades a serem injetados no template
- */
+/**
+* @typedef {Object} WindowData - Dados de uma janela a ser aberta
+* @property {module:Fenestra/Components/Window~WindowProps} props - Propriedades da Janela
+* @property {*} template - Componente renderizável de conteúdo da janela
+* @property {Object} templateProps - Propriedades a serem injetados no template
+*/
 
- /**
- * @typedef {Object} WindowState Estado de uma janela armazenado em um Store Redux.
- * @property {module:Fenestra/Reducers~WinKey} key Identificador da Janela
- * @property {module:Fenestra/Components/Window~WindowProps} props Propriedades da Janela
- * @property {module:Fenestra/Components/Window~BoundWindow} component Componente da Janela conectada ao redux
- * @property {*} content Componente do Conteúdo da Janela
- */
+/**
+* @typedef {Object} WindowState Estado de uma janela armazenado em um Store Redux.
+* @property {module:Fenestra/Reducers~WinKey} key Identificador da Janela
+* @property {module:Fenestra/Components/Window~WindowProps} props Propriedades da Janela
+* @property {module:Fenestra/Components/Window~BoundWindow} component Componente da Janela conectada ao redux
+* @property {*} content Componente do Conteúdo da Janela
+*/
 
 /**
  * Janela da Aplicação Fenestra
@@ -59,6 +60,7 @@ class Window extends React.Component {
         setLoading: PropTypes.func,
         setFooter: PropTypes.func,
         setData: PropTypes.func,
+        options: PropTypes.object
     }
 
     /**
@@ -77,7 +79,8 @@ class Window extends React.Component {
         close: () => undefined,
         setLoading: () => undefined,
         setFooter: () => undefined,
-        setData: () => undefined
+        setData: () => undefined,
+        options: {}
     }
 
     /**
@@ -87,7 +90,7 @@ class Window extends React.Component {
      */
     close = (event) => {
         event.stopPropagation();
-        if (global.confirm(this.props.msgs.closeDialog + this.props.title + "?")) {
+        if (!this.props.options.confirmOnClose || global.confirm(this.props.options.msgs.closeDialog + this.props.title + "?")) {
             this.props.close();
         }
     }
@@ -113,6 +116,21 @@ class Window extends React.Component {
     }
 
     /**
+     * Define se já houve um toque. Utilizado para detectar o toque duplo.
+     */
+    tapped = false;
+
+    startTouch(x, y, event) {
+        if (this.tapped) {
+            this.toggleMaximize(event);
+        } else {
+            this.tapped = true;
+            setTimeout(() => { this.tapped = false }, 300);
+            this.props.startMove(x, y);
+        }
+    }
+
+    /**
      * Renderiza o componente.
      * @method
      */
@@ -127,10 +145,11 @@ class Window extends React.Component {
         return (
             <div
                 className={
-                    "fenestra-window " +
-                    (this.props.active ? "fenestra-window-active" : "") + " " +
-                    (this.props.maximized ? "fenestra-window-maximized" : "") + " " +
-                    (this.props.minimized ? "fenestra-window-minimized" : "")
+                    "fenestra-window" +
+                    (this.props.active    ? " fenestra-window-active"    : "")+
+                    (this.props.maximized ? " fenestra-window-maximized" : "")+
+                    (this.props.noFooter  ? " fenestra-window-nofooter"  : "")+ 
+                    (this.props.minimized ? " fenestra-window-minimized" : "")
                 }
                 style={!this.props.maximized ? this.props.style : null}
                 onMouseDown={() => this.props.activate()}
@@ -141,19 +160,19 @@ class Window extends React.Component {
                     style={{ borderRadius: this.props.maximized ? 0 : undefined }}
                     onDoubleClick={(e) => this.toggleMaximize(e)}
                     onMouseDown={e => this.props.startMove(e.pageX, e.pageY)}
-                    onTouchStart={event => this.props.startMove(event.touches[0].pageX, event.touches[0].pageY)}
+                    onTouchStart={event => this.startTouch(event.touches[0].pageX, event.touches[0].pageY, event)}
                 >
 
                     <span className="fenestra-window-header-title">{this.props.title}</span>
 
                     <div className="fenestra-window-header-buttons">
-                        <button title={this.props.msgs.minimizeWindow} type="button" className={this.props.minimizeable ? "" : "d-none"} onClick={(e) => this.minimize(e)}>
+                        <button title={this.props.options.msgs.minimizeWindow} type="button" className={this.props.minimizeable ? "" : "d-none"} onClick={(e) => this.minimize(e)}>
                             <i className="fa fa-window-minimize"></i>
                         </button>&nbsp;
-                        <button title={this.props.msgs.maximizeWindow} type="button" className={this.props.resizeable ? "" : "d-none"} onClick={(e) => this.toggleMaximize(e)}>
+                        <button title={this.props.options.msgs.maximizeWindow} type="button" className={this.props.resizeable ? "" : "d-none"} onClick={(e) => this.toggleMaximize(e)}>
                             <i className={"fa fa-window-" + (this.props.maximized ? "restore" : "maximize")}></i>
                         </button>&nbsp;
-                        <button title={this.props.msgs.closeWindow} type="button" className={this.props.closeable ? "" : "d-none"} onClick={(e) => this.close(e)}>
+                        <button title={this.props.options.msgs.closeWindow} type="button" className={this.props.closeable ? "" : "d-none"} onClick={(e) => this.close(e)}>
                             <i className="fa fa-remove"></i>
                         </button>
                     </div>
@@ -161,19 +180,23 @@ class Window extends React.Component {
                 </div>
 
                 <div className="fenestra-window-body">
+
                     {this.props.children}
+
                     {loading}
-                </div>
+
+                </div>                
 
                 <div className="fenestra-window-footer">
-                    {this.props.footer}
-                    <button title={this.props.msgs.resizeWindow} type="button"
-                        className="fenestra-window-resize"
-                        onMouseDown={({ pageX, pageY }) => this.props.startResize(pageX, pageY)}
-                        onTouchStart={e => this.props.startResize(e.touches[0].pageX, e.touches[0].pageY)}>
-                        <i className="fa fa-expand fa-flip-horizontal"></i>
-                    </button>
+                    {this.props.footer}&nbsp;
                 </div>
+
+                <button title={this.props.options.msgs.resizeWindow} type="button"
+                    className="fenestra-window-resize"
+                    onMouseDown={({ pageX, pageY }) => this.props.startResize(pageX, pageY)}
+                    onTouchStart={e => this.props.startResize(e.touches[0].pageX, e.touches[0].pageY)}>
+                    <i className="fa fa-expand fa-flip-horizontal"></i>
+                </button>
 
             </div>
         );

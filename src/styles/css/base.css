@@ -4,7 +4,13 @@
   top: 0;
   left: 0;
   bottom: 0;
-  right: 0; }
+  right: 0;
+  overflow-y: hidden; }
+
+.fenestra-desktop *,
+.fenestra-desktop *::after,
+.fenestra-desktop *::before {
+  box-sizing: border-box; }
 
 .fenestra-desktop-windows {
   background-color: transparent !important;
@@ -12,23 +18,26 @@
   top: 0;
   left: 0;
   right: 0;
-  bottom: 50px;
   overflow: auto; }
 
-.fenestra-desktop-maximized
+.fenestra-desktop-maximized >
 .fenestra-desktop-windows {
   overflow: hidden; }
 
-.fenestra-desktop-moving
+.fenestra-desktop-moving >
 .fenestra-desktop-windows {
   overflow: hidden; }
+
+.fenestra-desktop-moving >
+.fenestra-desktop-windows >
+.fenestra-window {
+  transition: none; }
 
 .fenestra-desktop-icons {
   background-color: transparent !important;
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 50px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -47,14 +56,17 @@
 .fenestra-taskbar {
   position: absolute;
   bottom: 0px;
-  height: 50px;
   width: 100%;
   margin: 0px;
   background-color: gray;
   display: flex;
-  align-items: center;
   align-items: stretch;
   z-index: 1000; }
+
+.fenestra-taskbar,
+.fenestra-desktop-icons,
+.fenestra-desktop-windows {
+  transition: bottom 0.5s; }
 
 .fenestra-taskbar > * {
   margin: 5px; }
@@ -83,8 +95,7 @@
 
 .fenestra-taskbar-button-desktop {
   margin: 5px;
-  margin-left: auto;
-  width: 40px; }
+  margin-left: auto; }
 
 .fenestra-taskbar-button-windows {
   margin: 5px;
@@ -124,7 +135,7 @@
   align-items: center;
   user-select: none; }
 
-.fenestra-window-active
+.fenestra-window-active >
 .fenestra-window-header {
   background-color: black; }
 
@@ -153,12 +164,16 @@
 
 .fenestra-window-footer {
   display: flex;
-  height: 1em;
+  height: auto;
   padding: 5px;
   background-color: gray;
-  color: white; }
+  color: black; }
 
-.fenestra-window-maximized
+.fenestra-window-nofooter >
+.fenestra-window-footer {
+  display: none !important; }
+
+.fenestra-window-maximized >
 .fenestra-window-footer {
   border: none;
   border-bottom: solid white 1px;
@@ -166,18 +181,27 @@
 
 .fenestra-window-resize {
   cursor: nwse-resize;
-  margin-left: auto;
-  margin-right: 2px;
+  position: absolute;
+  bottom: 2px;
+  right: 1px;
+  font-size: 1em;
+  line-height: 1em;
+  height: 1em;
   padding: 0 !important;
   text-decoration: none;
   appearance: none;
   border: none;
-  color: white;
-  background-color: transparent !important; }
+  color: transparent !important;
+  background-color: transparent !important;
+  z-index: 10000; }
 
-.fenestra-window-maximized
+.fenestra-window-resize:hover,
+.fenestra-window-resize:active {
+  color: black !important; }
+
+.fenestra-window-maximized >
 .fenestra-window-resize {
-  display: none; }
+  display: none !important; }
 
 .fenestra-loading {
   display: flex;
@@ -195,12 +219,6 @@
 @media (max-width: 576px) {
   body {
     overflow-y: hidden; }
-  .fenestra-desktop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0; }
   .fenestra-taskbar-button-windows {
     display: block !important; }
   .fenestra-taskbar-button-windows:focus +
@@ -216,7 +234,8 @@
     padding: 5px;
     overflow-y: auto;
     height: auto; }
-  .fenestra-taskbar-buttons .fenestra-taskbar-button {
+  .fenestra-taskbar-buttons >
+.fenestra-taskbar-button {
     display: block;
     width: 100%;
     height: 3em;

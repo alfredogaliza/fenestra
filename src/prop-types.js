@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 
 /**
- * @constant {PropTypes} windowPropTypes Definição das propriedades do componente Janela.
+ * @constant {object} windowPropTypes Definição das propriedades do componente Janela.
+ * @property {PropTypes} props Propriedades da janela
+ * @property {PropTypes} template Template da janela
+ * @property {PropTypes} templateProps Propriedades do Template da janela
  */
 export const windowPropTypes = PropTypes.shape({
     props: PropTypes.shape({
@@ -12,7 +15,10 @@ export const windowPropTypes = PropTypes.shape({
 });
 
 /**
- * @constant {PropTypes} iconPropTypes Definição das propriedades do componente Ícone.
+ * @constant {object} iconPropTypes Definição das propriedades do componente Ícone.
+ * @property {PropTypes} icon Classe CSS correspondente ao ícone
+ * @property {PropTypes} title Título do ícone
+ * @property {PropTypes} window Janela a ser aberta pelo ícone
  */
 export const iconPropTypes = PropTypes.shape({
     icon: PropTypes.string,
@@ -21,7 +27,12 @@ export const iconPropTypes = PropTypes.shape({
 });
 
 /**
- * @constant {PropTypes} windowStatePropTypes Definição das propriedades de uma Janela-Estado.
+ * @constant {object} windowStatePropTypes Definição das propriedades de uma Janela-Estado.
+ * @property {PropTypes} key Chave da Janela
+ * @property {PropTypes} props Propriedades da janela
+ * @property {PropTypes} component Componente da Janela
+ * @property {PropTypes} content Conteúdo da janela
+ * 
  */
 export const windowStatePropTypes = PropTypes.shape({
     key: PropTypes.number,
@@ -33,15 +44,20 @@ export const windowStatePropTypes = PropTypes.shape({
 });
 
 /**
- * @constant {PropTypes} taskbarPropTypes Definição das propriedades do componente Barra de Tarefas.
+ * @constant {object} taskbarPropTypes Definição das propriedades do componente Barra de Tarefas.
+ * @property {PropTypes} windows Janelas abertas no desktop
+ * @property {PropTypes} options Opções da aplicação
+ * @property {PropTypes} activate Função de ativação de uma janela
  */
 export const taskbarPropTypes = {
     windows: PropTypes.arrayOf(windowStatePropTypes),
+    options: PropTypes.object,
     activate: PropTypes.func
 };
 
 /**
- * @constant {PropTypes} appPropTypes Definição das propriedades da Aplicação Fenestra.
+ * @constant {object} appPropTypes Definição das propriedades da Aplicação Fenestra.
+ * @property {PropTypes} data Dados de inicialização da aplicação
  */
 export const appPropTypes = {
     data: PropTypes.shape({
@@ -50,6 +66,8 @@ export const appPropTypes = {
         ),
         icons: PropTypes.arrayOf(
             iconPropTypes
-        )
+        ),
+        options: PropTypes.object,
+        msg: PropTypes.object        
     })
 }

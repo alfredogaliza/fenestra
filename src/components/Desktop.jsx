@@ -13,12 +13,12 @@ import Taskbar from "./Taskbar";
 import { iconPropTypes, windowStatePropTypes } from '../prop-types';
 
 
- /**
- * @typedef {Object} IconData - Dados de um ícone a ser posicionado no Desktop
- * @property {string} icon - Classe css referente a um ícone do Font Awesome 4.7
- * @property {string} title - Título abaixo do ícone
- * @property {module:Fenestra/Components/Window~WindowData} window - Propriedades da Janela a ser aberta ao clicar no ícone
- */
+/**
+* @typedef {Object} IconData - Dados de um ícone a ser posicionado no Desktop
+* @property {string} icon - Classe css referente a um ícone do Font Awesome 4.7
+* @property {string} title - Título abaixo do ícone
+* @property {module:Fenestra/Components/Window~WindowData} window - Propriedades da Janela a ser aberta ao clicar no ícone
+*/
 
 /**
  * Componente do Desktop da Aplicação Fenestra.
@@ -28,9 +28,24 @@ class Desktop extends React.Component {
 
 
     /**
-     * Referência ao Container das Janelas.
+     * Referência ao Elemento do Desktop.
+     */
+    desktopRef = React.createRef();
+
+    /**
+     * Referência ao Container das janelas.
      */
     windowsRef = React.createRef();
+
+    /**
+     * Posição Y do toque inicial
+     */
+    initialSwipe = null;
+
+    /**
+     * Posição Y do toque atual
+     */
+    currentSwipe = null;
 
     /**
      * Método chamado quando o desktop é atualizado. Caso haja uma janela maximizada,
@@ -39,7 +54,7 @@ class Desktop extends React.Component {
      * @method
      */
     componentDidUpdate() {
-        if (this.props.isMaximized){
+        if (this.props.isMaximized) {
             this.windowsRef.current.scrollTop = 0;
             this.windowsRef.current.scrollLeft = 0;
         }
@@ -65,7 +80,8 @@ class Desktop extends React.Component {
         close: PropTypes.func,
         setLoading: PropTypes.func,
         setFooter: PropTypes.func,
-        setData: PropTypes.func
+        setData: PropTypes.func,
+        options: PropTypes.object
     }
 
     /**
@@ -88,7 +104,73 @@ class Desktop extends React.Component {
         close: () => undefined,
         setLoading: () => undefined,
         setFooter: () => undefined,
-        setData: () => undefined
+        setData: () => undefined,
+        options: {
+            msgs: {}
+        }
+    }
+
+    /**
+     * Transforma a janela, além de mostrar a barra de tarefas, caso esteja oculta.
+     * @param {integer} x Posição X onde ocorreu o evento
+     * @param {integer} y Posição Y onde ocorreu o evento
+     */
+    moveMouse(x, y) {
+
+        if (this.props.options.autohideTaskbar) {
+
+            const limit = this.desktopRef.current.offsetTop + this.desktopRef.current.offsetHeight - this.props.options.taskbarHeight;
+
+            if (y > limit) {
+                this.props.showTaskbar();
+            }
+
+        }
+
+        this.props.move(x, y);
+
+    }
+
+    /**
+     * Transforma a janela através do evento de toque, além de salvar a posição atual do swipe
+     * @param {integer} x Posição X onde ocorreu o evento
+     * @param {integer} y Posição Y onde ocorreu o evento
+     */
+    moveTouch(x, y) {
+
+        if (this.props.options.autohideTaskbar) {
+            this.currentSwipe = y;
+        }
+
+        this.props.move(x, y);
+
+    }
+
+    /**
+     * Inicia um movimento de Toque no desktop. Após 300ms o swipe será invalidado
+     * @param {integer} y Posição Y inicial do toque
+     */
+    startTouch(y) {
+        if (this.props.options.autohideTaskbar) {
+            this.initialSwipe = y;
+            setTimeout(() => { this.initialSwipe = null }, 300);
+        }
+    }
+
+    /**
+     * Finaliza o swipe
+     */
+    endTouch() {
+        if (this.props.options.autohideTaskbar) {
+            const limit = this.desktopRef.current.offsetTop + this.desktopRef.current.offsetHeight - this.props.options.taskbarHeight;
+            if (this.initialSwipe > limit && this.currentSwipe < this.initialSwipe) {
+                this.props.showTaskbar();
+            } else if (this.currentSwipe > limit && this.currentSwipe > limit) {
+                this.props.hideTaskbar();
+            }
+        }
+        this.initialSwipe = null;
+        this.props.endMove();
     }
 
     /**
@@ -99,7 +181,7 @@ class Desktop extends React.Component {
 
         const icons = this.props.icons.map((icon, key) => {
             return (
-                <button title={icon.title} key={key} type="button" className="fenestra-desktop-icon" onClick={() => icon.window? this.props.open(icon.window.props,icon.window.template,icon.window.templateProps): null}>
+                <button title={icon.title} key={key} type="button" className="fenestra-desktop-icon" onClick={() => icon.window ? this.props.open(icon.window.props, icon.window.template, icon.window.templateProps) : null}>
                     <i className={icon.icon}></i><br />
                     <span className="small">{icon.title}</span>
                 </button>
@@ -115,22 +197,33 @@ class Desktop extends React.Component {
             );
         });
 
+        const bottomStyle = {
+            bottom: this.props.options.showTaskbar ? this.props.options.taskbarHeight : 0
+        };
+
         return (
-            <div className={"fenestra-desktop"+(this.props.isMaximized? " fenestra-desktop-maximized" : "")+(this.props.isMoving? " fenestra-desktop-moving" : "")}
-                onMouseMove={({ pageX, pageY }) => this.props.move(pageX, pageY)}
-                onTouchMove={event => this.props.move(event.touches[0].pageX, event.touches[0].pageY)}
+            <div ref={this.desktopRef}
+                className={
+                    "fenestra-desktop " +
+                    this.props.options.className +
+                    (this.props.isMaximized ? "fenestra-desktop-maximized" : "") +
+                    (this.props.isMoving ? " fenestra-desktop-moving" : "")
+                }
+                onMouseMove={({ pageX, pageY }) => this.moveMouse(pageX, pageY)}
                 onMouseUp={() => this.props.endMove()}
                 onMouseLeave={() => this.props.endMove()}
-                onTouchEnd={() => this.props.endMove()}
-                onTouchCancel={() => this.props.endMove()}
+                onTouchStart={event => this.startTouch(event.touches[0].pageY)}
+                onTouchMove={event => this.moveTouch(event.touches[0].pageX, event.touches[0].pageY)}
+                onTouchEnd={() => this.endTouch()}
+                onTouchCancel={() => this.endTouch()}
             >
-                <div className="fenestra-desktop-windows" ref={this.windowsRef}>
+                <Taskbar minimize={(key, minimize) => this.props.minimize(key, minimize)} />
+                <div className="fenestra-desktop-windows" style={bottomStyle} ref={this.windowsRef}>
                     {windows}
                 </div>
-                <div className="fenestra-desktop-icons">
+                <div className="fenestra-desktop-icons" style={bottomStyle}>
                     {icons}
                 </div>
-                <Taskbar minimize={(key, minimize) => this.props.minimize(key, minimize)} />
             </div >
         );
     }

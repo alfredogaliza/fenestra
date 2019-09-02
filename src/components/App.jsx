@@ -29,7 +29,8 @@ class App extends React.Component {
     static defaultProps = {
         data: {
             windows: [],
-            icons: []
+            icons: [],
+            options: {}
         }
     }
 

@@ -48,6 +48,16 @@ class Taskbar extends React.Component {
     }
 
     /**
+     * Define o contador para esconder a barra de tarefas, caso esteja configurado.
+     * @method
+     */
+    leave(){
+        if (this.props.options.autohideTaskbar){
+            setTimeout(() => this.props.hideTaskbar(), this.props.options.autohideTimeout); 
+        }
+    }
+
+    /**
      * Método de renderização do componente.
      * @method
      */
@@ -60,14 +70,18 @@ class Taskbar extends React.Component {
             );
         });
         return (
-            <nav className="fenestra-taskbar" >
-                <button title={this.props.msgs.showWindows} type="button" className="fenestra-taskbar-button fenestra-taskbar-button-windows">
+            <nav
+                className={"fenestra-taskbar" + (this.props.options.showTaskbar? "" : " fenestra-taskbar-hidden")}
+                style={{height: this.props.options.taskbarHeight, bottom: this.props.options.showTaskbar? 0 : -this.props.options.taskbarHeight}}
+                onMouseLeave={() => this.leave()}
+            >
+                <button title={this.props.options.msgs.showWindows} type="button" className="fenestra-taskbar-button fenestra-taskbar-button-windows">
                     <i className="fa fa-window-restore"></i>
                 </button>
-                <div className="fenestra-taskbar-buttons">
+                <div className="fenestra-taskbar-buttons" style={{bottom: this.props.options.taskbarHeight}}>
                     {buttons}
                 </div>
-                <button title={this.props.msgs.showDesktop} type="button" className="fenestra-taskbar-button fenestra-taskbar-button-desktop" onClick={() => this.minimizeAll()}>
+                <button title={this.props.options.msgs.showDesktop} type="button" className="fenestra-taskbar-button fenestra-taskbar-button-desktop" onClick={() => this.minimizeAll()}>
                     <i className="fa fa-desktop"></i>
                 </button>
             </nav>
