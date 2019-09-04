@@ -1,4 +1,14 @@
+/**
+ * Módulo de Ações para redução do Store do Redux.
+ * @module Fenestra/PropTypes 
+ * @see module:Fenestra/Components
+ */
+
 import PropTypes from 'prop-types';
+
+/**
+ * @typedef {Object} PropTypes Restrição das propriedades dos componentes React
+ */
 
 /**
  * @constant {object} windowPropTypes Definição das propriedades do componente Janela.
@@ -23,7 +33,7 @@ export const windowPropTypes = PropTypes.shape({
 export const iconPropTypes = PropTypes.shape({
     icon: PropTypes.string,
     title: PropTypes.string,
-    window: windowPropTypes   
+    window: windowPropTypes
 });
 
 /**
@@ -68,6 +78,6 @@ export const appPropTypes = {
             iconPropTypes
         ),
         options: PropTypes.object,
-        msg: PropTypes.object        
+        msg: PropTypes.object
     })
 }

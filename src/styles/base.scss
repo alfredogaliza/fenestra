@@ -136,6 +136,8 @@ $window-body-background: white;
   margin: $taskbar-padding;
   width: 40px;
   display: none !important;
+  justify-content: center;
+  align-items: center;
 }
 
 .fenestra-window {
@@ -279,7 +281,7 @@ $window-body-background: white;
   }
 
   .fenestra-taskbar-button-windows {    
-    display: block !important    ;
+    display: flex !important;
   }
   
   .fenestra-taskbar-button-windows:focus + 
@@ -297,7 +299,8 @@ $window-body-background: white;
     position: absolute;    
     border: solid white 1px;
     padding: 5px;
-
+    min-width: 150px;
+    min-height: 25px;
     overflow-y: auto; 
     height: auto;
 

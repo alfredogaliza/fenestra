@@ -9,10 +9,10 @@
  * @property {module:Fenestra/Actions/Types~ActionType} type - Tipo da Ação
  */
 
- /**
-  * @typedef {function} Dispatcher
-  * @param {module:Fenestra/Actions~Action} action Ação a ser despachada
-  */
+/**
+ * @typedef {function} Dispatcher
+ * @param {module:Fenestra/Actions~Action} action Ação a ser despachada
+ */
 
 import * as actionType from './types';
 
@@ -113,7 +113,8 @@ export const close = (key) => {
 export const activate = (key, active) => {
     return {
         type: actionType.WINDOW_ACTIVATE,
-        key, active
+        key,
+        active
     }
 }
 
@@ -127,7 +128,8 @@ export const activate = (key, active) => {
 export const minimize = (key, minimize) => {
     return {
         type: actionType.WINDOW_MINIMIZE,
-        key, minimize
+        key,
+        minimize
     }
 }
 
@@ -141,7 +143,8 @@ export const minimize = (key, minimize) => {
 export const maximize = (key, maximize) => {
     return {
         type: actionType.WINDOW_MAXIMIZE,
-        key, maximize
+        key,
+        maximize
     }
 }
 
@@ -157,7 +160,10 @@ export const maximize = (key, maximize) => {
 export const startTransform = (key, x, y, transformType) => {
     return {
         type: actionType.WINDOW_START_TRANSFORM,
-        key, x, y, transformType
+        key,
+        x,
+        y,
+        transformType
     }
 }
 
@@ -171,7 +177,8 @@ export const startTransform = (key, x, y, transformType) => {
 export const transform = (x, y) => {
     return {
         type: actionType.WINDOW_TRANSFORM,
-        x, y
+        x,
+        y
     }
 }
 
@@ -195,7 +202,8 @@ export const endTransform = () => {
  */
 export const setLoading = (key, isLoading) => ({
     type: actionType.SET_LOADING,
-    key, isLoading
+    key,
+    isLoading
 });
 
 /**
@@ -221,7 +229,8 @@ export const setData = (data = { icons: [], windows: [], options: {} }) => ({
  */
 export const setFooter = (key, footer) => ({
     type: actionType.SET_FOOTER,
-    key, footer
+    key,
+    footer
 });
 
 /**
@@ -310,7 +319,7 @@ export const boundDesktopActions = dispatch => ({
  * @typedef {Object} BoundTaskbarActions
  * @property {function} activate Ativa uma janela
  * @property {function} hideTaskbar Esconde a barra de Tarefas
-*/
+ */
 
 /**
  * Mapeia as propriedades da Barra de Tarefas para o despachante da aplicação.
@@ -425,7 +434,7 @@ export const boundWindowProps = (key) => state => ({
 /**
  * @typedef {Object} BoundIconActions
  * @property {function} openIcon Abre uma nova janela correspondente ao ícone
-*/
+ */
 
 /**
  * Mapeia as propriedades do ícone para o despachante da aplicação.

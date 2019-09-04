@@ -1,4 +1,3 @@
-
 const path = require('path');
 
 module.exports = {
@@ -6,29 +5,33 @@ module.exports = {
     entry: "./src/index.js",
 
     output: {
-      filename: "fenestra.bundle.js",
-      path: path.resolve(__dirname, 'build/'),
-      library: 'Fenestra',
-      libraryTarget: 'umd'
+        filename: "fenestra.bundle.js",
+        path: path.resolve(__dirname, 'build/'),
+        library: 'Fenestra',
+        libraryTarget: 'umd'
     },
 
     devServer: {
-        port: 5000,
-        contentBase: path.join(__dirname, 'build')
+        contentBase: path.join(__dirname, 'example'),
+        compress: true,
+        port: 9000
+     },
+
+    optimization: {
+        minimize: false
     },
 
     module: {
-        rules: [
-            {
-                test: /.jsx?/,
-                exclude: /node_modules/,
-                loader: 'babel-loader'
-            }
-        ]
+        rules: [{
+            test: /.jsx?/,
+            exclude: /node_modules/,
+            loader: 'babel-loader'
+        }]
     },
-    
+
     externals: {
-        'react': 'React'
+        'react': 'React',
+        'react-dom': "ReactDOM"
     },
 
     resolve: {

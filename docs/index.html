@@ -42,6 +42,173 @@
 
 
 
+    <section>
+        <article><h1>Fenestra</h1>
+<p>Fenestra é uma biblioteca para implementação de um Desktop baseado em janelas. Construído sobre React/Redux, você poderá fornecer seus próprios redutores para integrar a Store do Desktop. A interface do usuário se baseia nos ícones do Font Awesome 4.7. A Biblioteca também produz um design responsivo, bastante adaptado para dispositivos móveis.</p>
+<p><a href="https://alfredogaliza.github.io/fenestra">Live Demo</a></p>
+<p><img src="https://user-images.githubusercontent.com/6832383/62424798-46cc4b00-b6aa-11e9-934c-b99eb3c6e209.png" alt="Captura de tela de 2019-08-04 11-20-41"></p>
+<h1>Como utilizar esta biblioteca?</h1>
+<h2>Instale a partir do npm:</h2>
+<pre class="prettyprint source"><code>$ npm i fenestra
+</code></pre>
+<h2>Importe a API para o seu projeto</h2>
+<pre class="prettyprint source lang-javascript"><code>import Fenestra from 'fenestra';
+</code></pre>
+<p>ou</p>
+<pre class="prettyprint source lang-javascript"><code>const Fenestra = require('fenestra');
+</code></pre>
+<h2>Adicione a folha de estilo do Fenestra</h2>
+<pre class="prettyprint source lang-javascript"><code>import 'fenestra/css/base.css';
+import 'fenestra/css/theme.css'; //Opcional
+</code></pre>
+<h2>Adicione uma carga inicial de dados</h2>
+<pre class="prettyprint source lang-javascript"><code>const data = {
+  windows: [
+    {
+      props:{
+        title: &quot;Janela 1&quot;
+      },
+      template: MinhaClasseReact1,
+      templateProps: { mensagem: &quot;Um novo começo!&quot; }
+    }
+  ],
+  icons: [
+    {
+      icon: 'fa fa-check',
+      title: 'Abrir janela',
+      window: {
+        props:{
+          title: &quot;Janela 2&quot;
+        },
+        template: MinhaClasseReact2,
+        templateProps: { ...propriedades }
+      }
+   ]
+ }
+</code></pre>
+<h2>Instancie sua aplicação com os dados iniciais</h2>
+<pre class="prettyprint source lang-javascript"><code>ReactDOM.render(&lt;Fenestra data={data} />, document.getElementById(&quot;root&quot;));
+</code></pre>
+<p>Pronto, você terá um aplicação como a mostrada a seguir:</p>
+<pre class="prettyprint source lang-javascript"><code>import React from 'react';
+import ReactDOM from 'react-dom';
+import Fenestra from 'fenestra';
+
+import 'font-awesome/css/font-awesome.css';
+import 'fenestra/build/css/base.css';
+import 'fenestra/build/css/theme.css'; //Opcional
+
+const MinhaClasseReact1 = (props) => &lt;h1>{props.mensagem}&lt;/h1>;
+const MinhaClasseReact2 = (props) => &lt;h1>Apenas uma janela&lt;/h1>;
+
+const data = {
+   windows: [
+       {
+           props: {
+               title: &quot;Janela 1&quot;
+           },
+           template: MinhaClasseReact1,
+           templateProps: {
+             mensagem: &quot;Um novo começo!&quot;
+           }
+       }
+   ],
+   icons: [
+       {
+           icon: 'fa fa-check',
+           title: 'Abrir janela',
+           window: {
+               props: {
+                   title: &quot;Janela 2&quot;
+               },
+               template: MinhaClasseReact2,
+           }
+       }
+   ]
+};
+
+ReactDOM.render(&lt;Fenestra data={data} />, document.getElementById(&quot;root&quot;));
+</code></pre>
+<p>Os templates especificados na carga de dados receberão as seguintes propriedades:</p>
+<ul>
+<li><code>this.props.open(props, template, templateProps)</code>: Abre uma nova janela,</li>
+<li><code>this.props.activate()</code>: Ativa a janela,</li>
+<li><code>this.props.minimize(min = true)</code>: Minimiza ou deminimiza a janela,</li>
+<li><code>this.props.maximize(max = true)</code>: Maximiza ou demaxmiza a janela,</li>
+<li><code>this.props.close()</code>: Fecha a janela,</li>
+<li><code>this.props.setLoading(isLoading = true)</code>: Coloca um backdrop de carregamento da janela,</li>
+<li><code>this.props.setFooter(footer = &quot;&quot;)</code>: Altera a mensagem de rodapé da janela,</li>
+<li><code>this.props.setData({windows: [], icons: [], msgs: {} })</code>: Recarrega a sessão com novas janelas e ícones</li>
+</ul>
+<h1>O que é um template Fenestra?</h1>
+<p>Template é apenas um componente React injetado em uma Janela. Formulários, páginas, listas, tabelas ou qualquer tipo de conteúdo renderizável pelo React pode ser injetado como Template. Após inserido na janela, o componente receberá as propriedades definidas em templateProps, além das ações definidas para controle da janela. Também são inseridos métodos para controle da sessão (open e setData).</p>
+<h1>Posso utilizar um template conectado ao redux?</h1>
+<p>Boas notícias. Sim! Os dados da API Fenestra estão disponíveis no namespace fenestra e podem ser acessado através da função connect do react-redux:</p>
+<pre class="prettyprint source lang-javascript"><code>...
+class MyComponent extends React.Component {
+  ...
+}
+
+const mapStateToProps = (state) => {
+  fenestra: state.fenestra
+}
+
+export default connect(mapStateToProps)(MyComponent);
+</code></pre>
+<p>Você ainda pode usar sua própria Store, observando a utilização do redutor do Fenestra e o componente Desktop:</p>
+<pre class="prettyprint source lang-javascript"><code>...
+import myReducer from './reducers';
+import fenestra from 'fenestra/reducers';
+import * as fenestraActions from 'fenestra/actions';
+import {Desktop} from 'fenestra';
+import {createStore, combineReducers} from 'redux';
+import {Provider} from 'react-redux';
+...
+const store = createStore(combineReducers({myReducer, fenestra}));
+store.dispatch(fenestraActions.setData({...}));
+...
+ReactDOM.render(
+  &lt;Provider store={store}>
+    &lt;Desktop />
+  &lt;/Provider>, document.getElementById('root'));
+</code></pre>
+<h1>Posso mudar a cor do tema ou colocar uma imagem de background no desktop?</h1>
+<p>O fenestra utiliza duas folhas de estilos:</p>
+<ul>
+<li><code>build/css/base.css</code>: Fornece as funcionalidades básicas do sistema, com um mínimo de estilo.</li>
+<li><code>build/css/theme.css</code>: Apresenta a estilização da API, você poderá reescrever estes estilos, sem
+quebrar as funcionalidades da API.</li>
+</ul>
+<h1>O quê mais posso configurar no Desktop?</h1>
+<p>Você poderá passar na inicialização do Desktop os seguintes atributos da variável <code>data</code>:</p>
+<ul>
+<li><code>data.options.className</code>: Nome da classe adicional do desktop. Utilize para customização de CSS;</li>
+<li><code>data.options.showTaskbar</code>: Exibir/Ocultar a barra de tarefas;</li>
+<li><code>data.options.taskbarHeight</code>: Altura (em px) da barra de tarefas;</li>
+<li><code>data.options.autohideTaskbar</code>: Oculta a barra de tarefas após alguns milissegundos;</li>
+<li><code>data.options.autohideTimeout</code>: Tempo (em ms) para ocultar a barra de tarefas;</li>
+<li><code>data.options.confirmOnClose</code>: Solicitar confirmação antes de fechar cada janela;</li>
+<li><code>data.options.msgs</code>: Descrições e Mensagens do sistema;</li>
+</ul>
+<h1>Como faço para modificar os textos do diálogo e botões para minha língua?</h1>
+<p>Você poderá passar as suas próprias traduções para o fenestra através do objeto <code>msgs</code>, dentro da
+propriedade <code>data</code> repassada ao fenestra. Há uma tradução em Português (Brasil) que pode ser utilizada
+da seguinte forma:</p>
+<pre class="prettyprint source lang-javascript"><code>...
+import ptbr from 'fenestra/messages/pt-br';
+...
+const data = {
+  ...
+  options: {
+    ...
+    msgs: ptbr
+  }
+};
+
+ReactDOM.render(&lt;Fenestra data={data} />, document.getElementById(&quot;root&quot;));
+</code></pre></article>
+    </section>
+
 
 
 
@@ -50,13 +217,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Fenestra_Actions.html">Fenestra/Actions</a></li><li><a href="module-Fenestra_Actions_Types.html">Fenestra/Actions/Types</a></li><li><a href="module-Fenestra_Components_App.html">Fenestra/Components/App</a></li><li><a href="module-Fenestra_Components_Desktop.html">Fenestra/Components/Desktop</a></li><li><a href="module-Fenestra_Components_Taskbar.html">Fenestra/Components/Taskbar</a></li><li><a href="module-Fenestra_Components_Window.html">Fenestra/Components/Window</a></li><li><a href="module-Fenestra_Messages.html">Fenestra/Messages</a></li><li><a href="module-Fenestra_Reducers.html">Fenestra/Reducers</a></li></ul><h3>Classes</h3><ul><li><a href="module-Fenestra_Components_App-App.html">App</a></li><li><a href="module-Fenestra_Components_Desktop-Desktop.html">Desktop</a></li><li><a href="module-Fenestra_Components_Taskbar-Taskbar.html">Taskbar</a></li><li><a href="module-Fenestra_Components_Window.BoundWindow.html">BoundWindow</a></li><li><a href="module-Fenestra_Components_Window-Window.html">Window</a></li></ul><h3>Global</h3><ul><li><a href="global.html#appPropTypes">appPropTypes</a></li><li><a href="global.html#iconPropTypes">iconPropTypes</a></li><li><a href="global.html#taskbarPropTypes">taskbarPropTypes</a></li><li><a href="global.html#windowPropTypes">windowPropTypes</a></li><li><a href="global.html#windowStatePropTypes">windowStatePropTypes</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Fenestra_PropTypes.html">Fenestra/PropTypes</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Sep 02 2019 01:55:56 GMT-0300 (GMT-03:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Tue Sep 03 2019 14:15:57 GMT-0300 (GMT-03:00)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -75,9 +75,9 @@ class Taskbar extends React.Component {
                 style={{height: this.props.options.taskbarHeight, bottom: this.props.options.showTaskbar? 0 : -this.props.options.taskbarHeight}}
                 onMouseLeave={() => this.leave()}
             >
-                <button title={this.props.options.msgs.showWindows} type="button" className="fenestra-taskbar-button fenestra-taskbar-button-windows">
+                <a title={this.props.options.msgs.showWindows} type="button" className="fenestra-taskbar-button fenestra-taskbar-button-windows" tabindex='-1'> 
                     <i className="fa fa-window-restore"></i>
-                </button>
+                </a>
                 <div className="fenestra-taskbar-buttons" style={{bottom: this.props.options.taskbarHeight}}>
                     {buttons}
                 </div>
