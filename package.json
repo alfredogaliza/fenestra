@@ -5,9 +5,11 @@
     "main": "build/js/index.js",
     "scripts": {
         "start": "npm run test",
-        "test": "webpack-dev-server -p --inline --hot --config webpack.config.testing.js",
-        "docs": "jsdoc src/* -d docs",
-        "build": "babel src --out-dir build/js && webpack --config webpack.config.production.js"
+        "test": "npm run build && webpack-dev-server -p --inline --hot --config webpack.config.testing.js",
+        "docs": "jsdoc README.md src/* -d docs",
+        "build": "babel src --out-dir build/js && node-sass src/styles -o build/css && postcss build/css -p precss -p autoprefixer --dir build/css",
+        "dist": "npm run build && webpack --config webpack.config.production.js",
+        "clean": "rm -R build test docs dist || exit 0"
     },
     "repository": {
         "type": "git",
@@ -55,6 +57,7 @@
         "esdoc-standard-plugin": "^1.0.0",
         "fibers": "^4.0.1",
         "font-awesome": "^4.7.0",
+        "html-webpack-exclude-assets-plugin": "0.0.7",
         "html-webpack-plugin": "^3.2.0",
         "ignore-emit-webpack-plugin": "^2.0.2",
         "jsdoc": "^3.6.3",

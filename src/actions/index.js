@@ -464,3 +464,21 @@ export const boundTaskbarProps = state => ({
     windows: state.fenestra.windows,
     msgs: state.fenestra.msgs
 });
+
+
+export default {
+    open,
+    close,
+    activate,
+    minimize,
+    maximize,
+    startTransform,
+    transform,
+    endTransform,
+    setOptions,
+    setFooter,
+    setData,
+    showTaskbar,
+    hideTaskbar,
+    setLoading
+}

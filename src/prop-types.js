@@ -1,5 +1,5 @@
 /**
- * Módulo de Ações para redução do Store do Redux.
+ * Módulo de definições dos PropTypes dos componentes React.
  * @module Fenestra/PropTypes 
  * @see module:Fenestra/Components
  */

@@ -1,15 +1,21 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+var HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin');
+const IgnoreEmitPlugin = require('ignore-emit-webpack-plugin');
 
 module.exports = {
 
     mode: "development",
 
-    entry: "./src/test.js",
+    entry: {
+        main: "./build/js/test.js",
+        base: "./build/css/base.css",
+        theme: "./build/css/theme.css"
+    },
 
     output: {
-        filename: "main.js",
+        filename: "[name].js",
         path: path.resolve(__dirname, 'test')
     },
 
@@ -23,38 +29,32 @@ module.exports = {
         minimize: false
     },
 
-    module: {
-        rules: [
-            {
-                test: /.jsx?/,
-                exclude: /node_modules/,
-                loader: 'babel-loader'
-            },
-            {
-                test: /\.(sa|sc|c)ss$/,
-                use: [
-                  MiniCssExtractPlugin.loader,
-                  'css-loader',
-                  'postcss-loader',
-                  'sass-loader'
-                ],
-              }
-        ]
-    },
-
     externals: {
         'react': 'React',
         'react-dom': "ReactDOM"
     },
 
-    resolve: {
-        extensions: ['.js', '.jsx']
+    module: {
+        rules: [
+            {
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader'
+                ],
+              }
+        ]
     },
 
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'src/templates/test.html'
+            template: 'src/templates/test.html',
+            excludeAssets: [/(base|theme)\.js/]
         }),
-        new MiniCssExtractPlugin()
+        new HtmlWebpackExcludeAssetsPlugin(),
+        new IgnoreEmitPlugin(/(base|theme)\.js$/),
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
+        })
     ],
 }

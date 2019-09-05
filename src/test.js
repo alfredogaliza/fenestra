@@ -1,9 +1,6 @@
 import Fenestra from ".";
 import ReactDOM from 'react-dom';
 
-import './styles/base.scss';
-import './styles/theme.scss';
-
 const data = {
     icons: [{
         title: "New Window",

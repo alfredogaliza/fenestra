@@ -1,11 +1,11 @@
-import _App from './components/App';
-import _Desktop from './components/Desktop';
-import _Taskbar from './components/Taskbar';
-import _Window from './components/Window';
+import _Components from "./components";
+import _Actions from "./actions";
+import _Reducer from "./reducers";
+import _Messages from "./messages";
 
-export {_App as App};
-export {_Desktop as Desktop};
-export {_Taskbar as Taskbar};
-export {_Window as Window};
+export const Components = _Components;
+export const Actions = _Actions;
+export const Reducer = _Reducer;
+export const Messages = _Messages;
 
-export default _App;
+export default Components.App;

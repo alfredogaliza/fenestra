@@ -1,19 +1,21 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const IgnoreEmitPlugin = require('ignore-emit-webpack-plugin');
+
 module.exports = {
 
     mode: "production",
 
     entry: {
-        fenestra: "./src/index.js",
-        base: "./src/styles/base.scss",
-        theme: "./src/styles/theme.scss"
+        "fenestra.bundle": "./build/js/index.js",
+        "messages/ptbr": "./build/js/messages/pt-br.js",
+        base: "./build/css/base.css",
+        theme: "./build/css/theme.css"
     },
 
     output: {
-        filename: "[name].bundle.js",
-        path: path.resolve(__dirname, 'build/'),
+        filename: "js/[name].js",
+        path: path.resolve(__dirname, 'dist/'),
         library: 'Fenestra',
         libraryTarget: 'umd'
     },
@@ -21,17 +23,10 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx?/,
-                exclude: /node_modules/,
-                loader: 'babel-loader'
-            },
-            {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'postcss-loader',
-                    'sass-loader'
+                    'css-loader'
                 ],
               }
         ]
@@ -42,15 +37,11 @@ module.exports = {
         'react-dom': "ReactDOM"
     },
 
-    resolve: {
-        extensions: ['.js', '.jsx']
-    },
-
     plugins: [
         new MiniCssExtractPlugin({
             filename: "css/[name].css",
         }),
-        new IgnoreEmitPlugin(/^(base|theme)\.bundle.js$/)
+        new IgnoreEmitPlugin(/(base|theme)\.js$/)
     ]
 
 }

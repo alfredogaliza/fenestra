@@ -7,12 +7,12 @@ Fenestra é uma biblioteca para implementação de um Desktop baseado em janelas
 
 ![Captura de tela de 2019-08-04 11-20-41](https://user-images.githubusercontent.com/6832383/62424798-46cc4b00-b6aa-11e9-934c-b99eb3c6e209.png)
 
-# Como utilizar esta biblioteca?
-## Instale a partir do npm:
+## Como utilizar esta biblioteca?
+### Instale a partir do npm:
 ```
 $ npm i fenestra
 ```
-## Importe a API para o seu projeto
+### Importe a API para o seu projeto
 ```javascript
 import Fenestra from 'fenestra';
 ```
@@ -20,12 +20,12 @@ ou
 ```javascript
 const Fenestra = require('fenestra');
 ```
-## Adicione a folha de estilo do Fenestra
+### Adicione a folha de estilo do Fenestra
 ```javascript
 import 'fenestra/css/base.css';
 import 'fenestra/css/theme.css'; //Opcional
 ```
-## Adicione uma carga inicial de dados
+### Adicione uma carga inicial de dados
 ```javascript
 const data = {
   windows: [
@@ -51,7 +51,7 @@ const data = {
    ]
  }
  ```
- ## Instancie sua aplicação com os dados iniciais
+ ### Instancie sua aplicação com os dados iniciais
  ```javascript
  ReactDOM.render(<Fenestra data={data} />, document.getElementById("root"));
  ```
@@ -106,12 +106,12 @@ Os templates especificados na carga de dados receberão as seguintes propriedade
 *    `this.props.close()`: Fecha a janela,
 *    `this.props.setLoading(isLoading = true)`: Coloca um backdrop de carregamento da janela,
 *    `this.props.setFooter(footer = "")`: Altera a mensagem de rodapé da janela,
-*    `this.props.setData({windows: [], icons: [], msgs: {} })`: Recarrega a sessão com novas janelas e ícones
+*    `this.props.setData({windows: [], icons: [], options: {} })`: Recarrega a sessão com novas janelas e ícones
 
-# O que é um template Fenestra?
+## O que é um template Fenestra?
 Template é apenas um componente React injetado em uma Janela. Formulários, páginas, listas, tabelas ou qualquer tipo de conteúdo renderizável pelo React pode ser injetado como Template. Após inserido na janela, o componente receberá as propriedades definidas em templateProps, além das ações definidas para controle da janela. Também são inseridos métodos para controle da sessão (open e setData).
 
-# Posso utilizar um template conectado ao redux?
+## Posso utilizar um template conectado ao redux?
 
 Boas notícias. Sim! Os dados da API Fenestra estão disponíveis no namespace fenestra e podem ser acessado através da função connect do react-redux:
 ```javascript
@@ -130,28 +130,26 @@ Você ainda pode usar sua própria Store, observando a utilização do redutor d
 ```javascript
 ...
 import myReducer from './reducers';
-import fenestra from 'fenestra/reducers';
-import * as fenestraActions from 'fenestra/actions';
-import {Desktop} from 'fenestra';
+import { Actions as fenestraActions, Components, Reducer as fenestraReducer } from 'fenestra';
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 ...
-const store = createStore(combineReducers({myReducer, fenestra}));
+const store = createStore(combineReducers({myReducer, fenestraReducer}));
 store.dispatch(fenestraActions.setData({...}));
 ...
 ReactDOM.render(
   <Provider store={store}>
-    <Desktop />
+    <Components.Desktop />
   </Provider>, document.getElementById('root'));
 ```
 
-# Posso mudar a cor do tema ou colocar uma imagem de background no desktop?
+## Posso mudar a cor do tema ou colocar uma imagem de background no desktop?
 O fenestra utiliza duas folhas de estilos:
 * `build/css/base.css`: Fornece as funcionalidades básicas do sistema, com um mínimo de estilo.
 * `build/css/theme.css`: Apresenta a estilização da API, você poderá reescrever estes estilos, sem
 quebrar as funcionalidades da API.
 
-# O quê mais posso configurar no Desktop?
+## O quê mais posso configurar no Desktop?
 Você poderá passar na inicialização do Desktop os seguintes atributos da variável `data`:
 * `data.options.className`: Nome da classe adicional do desktop. Utilize para customização de CSS;
 * `data.options.showTaskbar`: Exibir/Ocultar a barra de tarefas;
@@ -161,14 +159,13 @@ Você poderá passar na inicialização do Desktop os seguintes atributos da var
 * `data.options.confirmOnClose`: Solicitar confirmação antes de fechar cada janela;
 * `data.options.msgs`: Descrições e Mensagens do sistema;
 
-
-# Como faço para modificar os textos do diálogo e botões para minha língua?
+## Como faço para modificar os textos do diálogo e botões para minha língua?
 Você poderá passar as suas próprias traduções para o fenestra através do objeto `msgs`, dentro da
 propriedade `data` repassada ao fenestra. Há uma tradução em Português (Brasil) que pode ser utilizada
 da seguinte forma:
 ```javascript
 ...
-import ptbr from 'fenestra/messages/pt-br';
+import ptbr from 'fenestra/build/js/messages/pt-br';
 ...
 const data = {
   ...
